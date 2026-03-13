@@ -142,7 +142,7 @@
     </div>
 
     <div class="card">
-        <div class="card-title">⏳ Quỹ 50 Ngày (Sheet2)</div>
+        <div class="card-title">⏳ Khoản Vay 50 Ngày (Sheet2)</div>
         <div class="btn-grid">
             <button onclick="sendReq('danhdau=true')">✅ Đánh Dấu Hôm Nay</button>
             <button class="danger-btn" onclick="confirmReset()">🔄 Reset Chu Kỳ Mới</button>
@@ -210,7 +210,7 @@
 
         // Cảnh báo trước khi Reset 50 ngày
         function confirmReset() {
-            if (confirm("⚠️ BẠN CÓ CHẮC CHẮN MUỐN RESET?\nHành động này sẽ xóa các ngày cũ ở Sheet2 và bắt đầu chu kỳ 51 ngày mới từ hôm nay!")) {
+            if (confirm("⚠️ BẠN CÓ CHẮC CHẮN MUỐN RESET?\nHành động này sẽ xóa các ngày cũ ở Sheet2 và bắt đầu chu kỳ 50 ngày mới từ hôm nay!")) {
                 sendReq('danhdau=reset');
             }
         }
