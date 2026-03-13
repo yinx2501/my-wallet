@@ -3,306 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyWallet Dashboard</title>
+    <title>MyWallet - Trạm Điều Khiển</title>
     <style>
         :root {
-            --grab: #00B14F;
-            --timo: #7A3594;
-            --vi: #F28500;
-            --bg: #e9ecef;
-            --text: #333;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --primary: #2e7d32; /* Xanh lá đậm */
+            --primary-hover: #1b5e20;
+            --danger: #d32f2f;
+            --text-main: #333333;
+            --border: #e0e0e0;
         }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        /* Mặc định cho Mobile (Xếp dọc) */
-        #app {
-            width: 100%;
-            max-width: 500px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        h2 {
-            text-align: center;
-            margin-top: 0;
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-        }
-        
-        /* Chia bố cục */
-        .dashboard-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* --- MÀN HÌNH CHÍNH PC --- */
-        @media (min-width: 800px) {
-            #app {
-                max-width: 900px; /* Rộng hơn trên PC */
-            }
-            .dashboard-grid {
-                flex-direction: row-reverse; /* PC: Màn hình log bên phải, nhập liệu bên trái */
-            }
-            .panel-right {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-            }
-            .panel-left {
-                flex: 1;
-            }
-            #screen {
-                flex-grow: 1; /* Màn hình log tự kéo dài cho bằng cột bên trái */
-                max-height: none !important;
-            }
-        }
-
-        /* Thành phần giao diện */
-        #screen {
-            background-color: #1e1e1e;
-            color: #4af626;
             padding: 15px;
-            border-radius: 8px;
-            min-height: 200px;
-            max-height: 300px;
+            padding-bottom: 50px;
+        }
+
+        h2 { text-align: center; color: var(--primary); margin-bottom: 5px; }
+        .subtitle { text-align: center; font-size: 13px; color: #666; margin-bottom: 20px; }
+
+        /* Khung hiển thị kết quả */
+        #resultBox {
+            background-color: #263238;
+            color: #00e676;
+            padding: 15px;
+            border-radius: 10px;
+            min-height: 80px;
             font-family: monospace;
-            white-space: pre-wrap;
             font-size: 14px;
-            overflow-y: auto;
-            border: 4px solid #333;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #00e676;
         }
+
+        /* Các khối Card chức năng */
         .card {
-            background: #fdfdfd;
-            border: 1px solid #e1e4e8;
-            border-radius: 8px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
             padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 16px;
             margin-bottom: 15px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            color: #1565c0;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 5px;
+            text-transform: uppercase;
         }
-        .card:last-child { margin-bottom: 0; }
-        .card h3 {
-            margin: 0 0 12px 0;
-            font-size: 15px;
-            color: #444;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 8px;
+
+        /* Lưới nút bấm (Grid) */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
+        .btn-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        button:active { transform: scale(0.97); }
+        button.action-btn { background-color: #0277bd; }
+        button.danger-btn { background-color: var(--danger); }
+        button.warning-btn { background-color: #f57c00; }
+        
+        /* Khung nhập liệu */
         .input-group {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
         .input-group label {
-            width: 80px;
-            font-weight: 600;
-            font-size: 13px;
+            width: 90px;
+            font-size: 14px;
+            font-weight: 500;
         }
-        .input-group input, .input-group select {
+        .input-group input {
             flex: 1;
-            padding: 8px 10px;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            outline: none;
-            transition: border 0.3s;
-        }
-        .input-group input:focus, .input-group select:focus {
-            border-color: #3498db;
-        }
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
             border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
-            font-size: 14px;
-            transition: opacity 0.2s, transform 0.1s;
+            font-size: 16px;
         }
-        .btn:hover { opacity: 0.85; }
-        .btn:active { transform: scale(0.98); }
-        
-        .btn-blue { background: #3498db; color: white; }
-        .btn-green { background: var(--grab); color: white; }
-        .btn-purple { background: var(--timo); color: white; }
-        .btn-orange { background: var(--vi); color: white; }
-        .btn-dark { background: #34495e; color: white; }
-        
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .note { font-size: 11px; color: #7f8c8d; margin-top: 8px; font-style: italic; text-align: center;}
+
+        /* Nút full width */
+        .btn-full { width: 100%; margin-top: 10px; padding: 14px; font-size: 15px; }
+
+        /* Loader mờ màn hình */
+        #loader {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 999;
+            text-align: center;
+            padding-top: 50vh;
+            font-weight: bold;
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
 
-<div id="app">
-    <h2>MyWallet by YINX</h2>
-    
-    <div class="dashboard-grid">
-        
-        <div class="panel-right">
-            <div class="grid-2" style="margin-bottom: 15px;">
-                <button class="btn btn-blue" onclick="sendRequest({readonly: 'true'})">📊 Xem Số Dư</button>
-                <button class="btn btn-dark" onclick="sendRequest({report: 'log'})">📝 Xem Nhật Ký</button>
-            </div>
-            <div id="screen">Đang kết nối đến hệ thống...</div>
+    <h2>MyWallet</h2>
+    <div class="subtitle">Trạm Quản Lý Siêu Tốc</div>
+
+    <div id="loader">⏳ Đang xử lý...</div>
+
+    <div id="resultBox">Sẵn sàng nhận lệnh!</div>
+
+    <div class="card">
+        <div class="card-title">📊 Tra Cứu Nhanh</div>
+        <div class="btn-grid btn-grid-3">
+            <button class="action-btn" onclick="sendReq('readonly=true')">SỐ DƯ</button>
+            <button class="action-btn" onclick="sendReq('report=log')">NHẬT KÝ</button>
+            <button class="action-btn" onclick="sendReq('report=loan')">KHOẢN GỬI</button>
         </div>
-
-        <div class="panel-left">
-            <div class="card">
-                <h3>💰 Cập Nhật Tiền Ví</h3>
-                <div class="input-group">
-                    <label style="color: var(--grab)">Grab:</label>
-                    <input type="number" id="in_grab" placeholder="Nhập biến động (+ hoặc -)...">
-                </div>
-                <div class="input-group">
-                    <label style="color: var(--timo)">Timo:</label>
-                    <input type="number" id="in_timo" placeholder="Nhập biến động (+ hoặc -)...">
-                </div>
-                <div class="input-group">
-                    <label style="color: var(--vi)">Tiền mặt:</label>
-                    <input type="number" id="in_vi" placeholder="Nhập biến động (+ hoặc -)...">
-                </div>
-                <button class="btn btn-green" onclick="submitWallet()">Cập Nhật Thay Đổi</button>
-                <div class="note">* Thêm 250198 hoặc -250198 ở đầu để set cứng giá trị.</div>
-            </div>
-
-            <div class="card">
-                <h3>🔄 Chuyển Tiền Nội Bộ</h3>
-                <div class="grid-2">
-                    <div>
-                        <label style="font-size: 12px; font-weight: bold; color: #666;">Từ (Trừ tiền):</label>
-                        <select id="sel_from" style="width: 100%; padding: 8px; margin-top: 4px;">
-                            <option value="1">Grab</option>
-                            <option value="2">Timo</option>
-                            <option value="3">Tiền mặt</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label style="font-size: 12px; font-weight: bold; color: #666;">Đến (Cộng tiền):</label>
-                        <select id="sel_to" style="width: 100%; padding: 8px; margin-top: 4px;">
-                            <option value="2">Timo</option>
-                            <option value="1">Grab</option>
-                            <option value="3">Tiền mặt</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="input-group" style="margin-top: 15px;">
-                    <label>Số tiền:</label>
-                    <input type="number" id="in_transfer" placeholder="Số tiền cần chuyển...">
-                </div>
-                <button class="btn btn-blue" onclick="submitTransfer()">Thực Hiện Chuyển</button>
-            </div>
-
-            <div class="card">
-                <h3>📓 Kế Toán & Ghi Nợ</h3>
-                <div class="input-group">
-                    <label>Trả luôn:</label>
-                    <input type="number" id="in_traluon" placeholder="Khoản chi sẽ trừ mai...">
-                </div>
-                <div class="input-group">
-                    <label>Trả sau:</label>
-                    <input type="number" id="in_trasau" placeholder="Khoản nợ chưa cần gấp...">
-                </div>
-                <button class="btn btn-orange" onclick="submitDebt()">Ghi Nhận Kế Toán</button>
-            </div>
-        </div>
-
     </div>
-</div>
 
-<script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbx3H6ZBP77KEwMXfqdBgmpImVufFgQSAx8MtMrPxdGgp0pRYaHgvoaCji_HfvDbBMuuHQ/exec";
-    const screenBox = document.getElementById("screen");
+    <div class="card">
+        <div class="card-title">⏳ Quỹ 50 Ngày (Sheet2)</div>
+        <div class="btn-grid">
+            <button onclick="sendReq('danhdau=true')">✅ Đánh Dấu Hôm Nay</button>
+            <button class="danger-btn" onclick="confirmReset()">🔄 Reset Chu Kỳ Mới</button>
+        </div>
+    </div>
 
-    function printScreen(text) {
-        screenBox.innerText = text;
-        screenBox.scrollTop = screenBox.scrollHeight;
-    }
+    <div class="card">
+        <div class="card-title">💰 Cập Nhật Biến Động</div>
+        <div class="input-group">
+            <label>🚗 Grab</label>
+            <input type="number" id="inpGrab" placeholder="Ví dụ: 150000 hoặc 250198...">
+        </div>
+        <div class="input-group">
+            <label>💳 Timo</label>
+            <input type="number" id="inpTimo" placeholder="Số tiền...">
+        </div>
+        <div class="input-group">
+            <label>💵 Tiền mặt</label>
+            <input type="number" id="inpVi" placeholder="Số tiền...">
+        </div>
+        <button class="btn-full" onclick="submitWallets()">🚀 CHỐT SỔ VÍ</button>
+    </div>
 
-    async function sendRequest(paramsObj) {
-        const filteredParams = {};
-        for (const key in paramsObj) {
-            if (paramsObj[key] !== "") {
-                filteredParams[key] = paramsObj[key];
+    <div class="card">
+        <div class="card-title">🔄 Luân Chuyển & Kế Toán</div>
+        <div class="input-group">
+            <label>💸 Trả luôn</label>
+            <input type="number" id="inpTraLuon" placeholder="Ghi nhận nợ và trừ tiền ngay">
+        </div>
+        <div class="input-group">
+            <label>📝 Trả sau</label>
+            <input type="number" id="inpTraSau" placeholder="Chỉ ghi nhận nợ">
+        </div>
+        <div class="input-group">
+            <label>🔄 Chuyển</label>
+            <input type="number" id="inpChuyenTien" placeholder="Cú pháp: 1250000 (Grab qua Timo 50k)">
+        </div>
+        <button class="warning-btn btn-full" onclick="submitDebts()">⚡ XỬ LÝ GIAO DỊCH</button>
+    </div>
+
+    <script>
+        // Đường link Code Lõi của bạn
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx3H6ZBP77KEwMXfqdBgmpImVufFgQSAx8MtMrPxdGgp0pRYaHgvoaCji_HfvDbBMuuHQ/exec";
+        
+        const resultBox = document.getElementById("resultBox");
+        const loader = document.getElementById("loader");
+
+        // Hàm gửi request gốc
+        function sendReq(queryString) {
+            loader.style.display = "block";
+            fetch(SCRIPT_URL + "?" + queryString)
+                .then(response => response.text())
+                .then(text => {
+                    loader.style.display = "none";
+                    resultBox.innerText = text;
+                    // Tự động cuộn lên trên cùng để xem kết quả
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    clearInputs();
+                })
+                .catch(error => {
+                    loader.style.display = "none";
+                    resultBox.innerText = "❌ Lỗi kết nối mạng: " + error;
+                });
+        }
+
+        // Cảnh báo trước khi Reset 50 ngày
+        function confirmReset() {
+            if (confirm("⚠️ BẠN CÓ CHẮC CHẮN MUỐN RESET?\nHành động này sẽ xóa các ngày cũ ở Sheet2 và bắt đầu chu kỳ 51 ngày mới từ hôm nay!")) {
+                sendReq('danhdau=reset');
             }
         }
 
-        if (Object.keys(filteredParams).length === 0) {
-            printScreen("⚠️ Vui lòng nhập ít nhất một giá trị.");
-            return;
+        // Đóng gói tham số cho khu vực Ví
+        function submitWallets() {
+            let query = [];
+            let g = document.getElementById("inpGrab").value.trim();
+            let t = document.getElementById("inpTimo").value.trim();
+            let v = document.getElementById("inpVi").value.trim();
+
+            if (g) query.push("grab=" + encodeURIComponent(g));
+            if (t) query.push("timo=" + encodeURIComponent(t));
+            if (v) query.push("vi=" + encodeURIComponent(v));
+
+            if (query.length === 0) {
+                alert("Vui lòng nhập ít nhất 1 số tiền để cập nhật!");
+                return;
+            }
+            sendReq(query.join("&"));
         }
 
-        printScreen("⏳ Hệ thống đang xử lý...");
-        
-        try {
-            const queryString = new URLSearchParams(filteredParams).toString();
-            const finalUrl = API_URL + "?" + queryString;
-            
-            // Xử lý chặn CORS của trình duyệt khi gọi Google Apps Script
-            const response = await fetch(finalUrl);
-            const data = await response.text();
-            
-            printScreen(data);
-            clearInputs();
-        } catch (error) {
-            printScreen("⚠️ Đã gửi lệnh! (Do bảo mật trình duyệt, hãy bấm 'Xem Số Dư' để check lại kết quả).");
-        }
-    }
+        // Đóng gói tham số cho khu vực Nợ & Chuyển tiền
+        function submitDebts() {
+            let query = [];
+            let tl = document.getElementById("inpTraLuon").value.trim();
+            let ts = document.getElementById("inpTraSau").value.trim();
+            let ct = document.getElementById("inpChuyenTien").value.trim();
 
-    function submitWallet() {
-        sendRequest({
-            grab: document.getElementById('in_grab').value,
-            timo: document.getElementById('in_timo').value,
-            vi: document.getElementById('in_vi').value
-        });
-    }
+            if (tl) query.push("traluon=" + encodeURIComponent(tl));
+            if (ts) query.push("trasau=" + encodeURIComponent(ts));
+            if (ct) query.push("chuyentien=" + encodeURIComponent(ct));
 
-    function submitDebt() {
-        sendRequest({
-            traluon: document.getElementById('in_traluon').value,
-            trasau: document.getElementById('in_trasau').value
-        });
-    }
-
-    function submitTransfer() {
-        const fromVal = document.getElementById('sel_from').value;
-        const toVal = document.getElementById('sel_to').value;
-        const amount = document.getElementById('in_transfer').value.trim();
-
-        if (!amount || amount <= 0) {
-            printScreen("⚠️ Vui lòng nhập số tiền hợp lệ để chuyển.");
-            return;
-        }
-        if (fromVal === toVal) {
-            printScreen("⚠️ LỖI: Ví nguồn và ví đích không được trùng nhau.");
-            return;
+            if (query.length === 0) {
+                alert("Vui lòng nhập số liệu để xử lý!");
+                return;
+            }
+            sendReq(query.join("&"));
         }
 
-        const transferCode = fromVal + toVal + amount;
-        sendRequest({ chuyentien: transferCode });
-    }
+        // Hàm tự động xóa trắng các ô nhập sau khi gửi thành công
+        function clearInputs() {
+            document.querySelectorAll('input').forEach(inp => inp.value = '');
+        }
 
-    function clearInputs() {
-        const inputs = document.querySelectorAll('input[type="number"]');
-        inputs.forEach(input => input.value = '');
-    }
-
-    window.onload = function() {
-        sendRequest({readonly: 'true'});
-    };
-</script>
-
+        // Vừa vào web tự động nạp số dư hiển thị
+        window.onload = function() {
+            sendReq('readonly=true');
+        };
+    </script>
 </body>
 </html>
