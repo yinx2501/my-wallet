@@ -28,19 +28,20 @@
         h2 { text-align: center; color: var(--primary); margin-bottom: 5px; }
         .subtitle { text-align: center; font-size: 13px; color: #666; margin-bottom: 20px; }
 
-        #resultBox {
+                #resultBox {
             background-color: #263238;
             color: #00e676;
             padding: 15px;
             border-radius: 10px;
             min-height: 80px;
-            font-family: monospace;
-            font-size: 14px;
+            font-family: inherit; /* ĐÃ SỬA: Kế thừa font hệ thống chuẩn của Apple/Windows */
+            font-size: 15px; /* Tăng lên 1 chút cho dễ nhìn */
             white-space: pre-wrap;
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-left: 5px solid #00e676;
         }
+
 
         .card {
             background-color: var(--card-bg);
