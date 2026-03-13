@@ -8,15 +8,16 @@
         :root {
             --bg-color: #f4f7f6;
             --card-bg: #ffffff;
-            --primary: #2e7d32; /* Xanh lá đậm */
+            --primary: #2e7d32;
             --primary-hover: #1b5e20;
             --danger: #d32f2f;
             --text-main: #333333;
             --border: #e0e0e0;
         }
 
+        /* ĐÃ SỬA FONT CHỮ CHUẨN HỆ THỐNG ĐỂ SẠCH LỖI TIẾNG VIỆT */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -27,7 +28,6 @@
         h2 { text-align: center; color: var(--primary); margin-bottom: 5px; }
         .subtitle { text-align: center; font-size: 13px; color: #666; margin-bottom: 20px; }
 
-        /* Khung hiển thị kết quả */
         #resultBox {
             background-color: #263238;
             color: #00e676;
@@ -42,7 +42,6 @@
             border-left: 5px solid #00e676;
         }
 
-        /* Các khối Card chức năng */
         .card {
             background-color: var(--card-bg);
             border-radius: 10px;
@@ -62,7 +61,6 @@
             text-transform: uppercase;
         }
 
-        /* Lưới nút bấm (Grid) */
         .btn-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -81,6 +79,8 @@
             cursor: pointer;
             transition: 0.2s;
             width: 100%;
+            /* Kế thừa font chữ của body để nút bấm cũng không bị lỗi */
+            font-family: inherit; 
         }
 
         button:active { transform: scale(0.97); }
@@ -88,7 +88,6 @@
         button.danger-btn { background-color: var(--danger); }
         button.warning-btn { background-color: #f57c00; }
         
-        /* Khung nhập liệu */
         .input-group {
             display: flex;
             align-items: center;
@@ -99,18 +98,19 @@
             font-size: 14px;
             font-weight: 500;
         }
-        .input-group input {
+        .input-group input, .input-group select {
             flex: 1;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 16px;
+            background-color: #fff;
+            /* Kế thừa font chữ */
+            font-family: inherit;
         }
 
-        /* Nút full width */
         .btn-full { width: 100%; margin-top: 10px; padding: 14px; font-size: 15px; }
 
-        /* Loader mờ màn hình */
         #loader {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -167,7 +167,34 @@
     </div>
 
     <div class="card">
-        <div class="card-title">🔄 Luân Chuyển & Kế Toán</div>
+        <div class="card-title">🔄 Luân Chuyển Nội Bộ</div>
+        <div class="btn-grid" style="margin-bottom: 12px;">
+            <div>
+                <label style="font-size: 13px; font-weight: bold; color: #666; display:block; margin-bottom:4px;">Từ ví (Nguồn):</label>
+                <select id="selFrom" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 15px;">
+                    <option value="1">Grab</option>
+                    <option value="2">Timo</option>
+                    <option value="3">Tiền mặt</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size: 13px; font-weight: bold; color: #666; display:block; margin-bottom:4px;">Sang ví (Đích):</label>
+                <select id="selTo" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 15px;">
+                    <option value="2">Timo</option>
+                    <option value="1">Grab</option>
+                    <option value="3">Tiền mặt</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>🔄 Số tiền</label>
+            <input type="number" id="inpChuyenTien" placeholder="Nhập số tiền cần chuyển...">
+        </div>
+        <button class="action-btn btn-full" onclick="submitTransfer()">🚀 THỰC HIỆN CHUYỂN</button>
+    </div>
+
+    <div class="card">
+        <div class="card-title">📓 Kế Toán & Ghi Nợ</div>
         <div class="input-group">
             <label>💸 Trả luôn</label>
             <input type="number" id="inpTraLuon" placeholder="Ghi nhận nợ và trừ tiền ngay">
@@ -176,21 +203,15 @@
             <label>📝 Trả sau</label>
             <input type="number" id="inpTraSau" placeholder="Chỉ ghi nhận nợ">
         </div>
-        <div class="input-group">
-            <label>🔄 Chuyển</label>
-            <input type="number" id="inpChuyenTien" placeholder="Cú pháp: 1250000 (Grab qua Timo 50k)">
-        </div>
-        <button class="warning-btn btn-full" onclick="submitDebts()">⚡ XỬ LÝ GIAO DỊCH</button>
+        <button class="warning-btn btn-full" onclick="submitAccounting()">⚡ XỬ LÝ KẾ TOÁN</button>
     </div>
 
     <script>
-        // Đường link Code Lõi của bạn
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx3H6ZBP77KEwMXfqdBgmpImVufFgQSAx8MtMrPxdGgp0pRYaHgvoaCji_HfvDbBMuuHQ/exec";
         
         const resultBox = document.getElementById("resultBox");
         const loader = document.getElementById("loader");
 
-        // Hàm gửi request gốc
         function sendReq(queryString) {
             loader.style.display = "block";
             fetch(SCRIPT_URL + "?" + queryString)
@@ -198,7 +219,6 @@
                 .then(text => {
                     loader.style.display = "none";
                     resultBox.innerText = text;
-                    // Tự động cuộn lên trên cùng để xem kết quả
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     clearInputs();
                 })
@@ -208,14 +228,12 @@
                 });
         }
 
-        // Cảnh báo trước khi Reset 50 ngày
         function confirmReset() {
             if (confirm("⚠️ BẠN CÓ CHẮC CHẮN MUỐN RESET?\nHành động này sẽ xóa các ngày cũ ở Sheet2 và bắt đầu chu kỳ 50 ngày mới từ hôm nay!")) {
                 sendReq('danhdau=reset');
             }
         }
 
-        // Đóng gói tham số cho khu vực Ví
         function submitWallets() {
             let query = [];
             let g = document.getElementById("inpGrab").value.trim();
@@ -227,36 +245,49 @@
             if (v) query.push("vi=" + encodeURIComponent(v));
 
             if (query.length === 0) {
-                alert("Vui lòng nhập ít nhất 1 số tiền để cập nhật!");
+                alert("Vui lòng nhập ít nhất 1 số tiền để cập nhật ví!");
                 return;
             }
             sendReq(query.join("&"));
         }
 
-        // Đóng gói tham số cho khu vực Nợ & Chuyển tiền
-        function submitDebts() {
+        function submitTransfer() {
+            let fromCode = document.getElementById("selFrom").value;
+            let toCode = document.getElementById("selTo").value;
+            let amount = document.getElementById("inpChuyenTien").value.trim();
+
+            if (!amount || amount <= 0) {
+                alert("Vui lòng nhập số tiền cần chuyển!");
+                return;
+            }
+            if (fromCode === toCode) {
+                alert("Lỗi: Ví nguồn và ví đích không được trùng nhau!");
+                return;
+            }
+
+            let transferCode = fromCode + toCode + amount;
+            sendReq("chuyentien=" + encodeURIComponent(transferCode));
+        }
+
+        function submitAccounting() {
             let query = [];
             let tl = document.getElementById("inpTraLuon").value.trim();
             let ts = document.getElementById("inpTraSau").value.trim();
-            let ct = document.getElementById("inpChuyenTien").value.trim();
 
             if (tl) query.push("traluon=" + encodeURIComponent(tl));
             if (ts) query.push("trasau=" + encodeURIComponent(ts));
-            if (ct) query.push("chuyentien=" + encodeURIComponent(ct));
 
             if (query.length === 0) {
-                alert("Vui lòng nhập số liệu để xử lý!");
+                alert("Vui lòng nhập số liệu kế toán!");
                 return;
             }
             sendReq(query.join("&"));
         }
 
-        // Hàm tự động xóa trắng các ô nhập sau khi gửi thành công
         function clearInputs() {
-            document.querySelectorAll('input').forEach(inp => inp.value = '');
+            document.querySelectorAll('input[type="number"]').forEach(inp => inp.value = '');
         }
 
-        // Vừa vào web tự động nạp số dư hiển thị
         window.onload = function() {
             sendReq('readonly=true');
         };
