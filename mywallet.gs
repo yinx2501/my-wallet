@@ -98,7 +98,7 @@ function doGet(e) {
       SpreadsheetApp.flush(); 
       var summaryVals = sheet2.getRange("C2:F2").getDisplayValues()[0];
       
-      var responseMsg = "✅ ĐÃ ĐÁNH DẤU THÀNH CÔNG\n──────────────\n" +
+      var responseMsg = "✅ ĐÃ GHI LẠI THÀNH CÔNG\n──────────────\n" +
                         "💰 Tổng tiền đã gửi: " + summaryVals[1] + "\n" +
                         "📅 Tổng ngày đã gửi: " + summaryVals[0] + "\n" +
                         "⏳ Tổng ngày còn lại: " + summaryVals[2] + "\n" +
