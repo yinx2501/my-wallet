@@ -62,8 +62,15 @@ function doGet(e) {
       // [THAY ĐỔI TẠI ĐÂY]: Rút ngày cuối cùng từ mảng ra để in thông báo
       var endDateStr = newDays[newDays.length - 1][0];
       
-      return ContentService.createTextOutput("✅ ĐÃ RESET VÀ TẠO CHU KỲ MỚI THÀNH CÔNG!\nBắt đầu: " + formatDateStr(baseDate) + "\nKết thúc: " + endDateStr).setMimeType(ContentService.MimeType.TEXT);
-    }
+      var thongBao = "🔄 ĐÃ RESET CHU KỲ\n" +
+                 "────────────────\n" + 
+                 "📅 Bắt đầu: " + formatDateStr(baseDate) + "\n" +
+                 "🏁 Kết thúc: " + endDateStr + "\n" +
+                 "🚀 Hệ thống đã sẵn sàng!";
+
+  return ContentService.createTextOutput(thongBao)
+    .setMimeType(ContentService.MimeType.TEXT);
+}
     // ---------------------------------------------------------
     // KỊCH BẢN 2: NẾU TRUYỀN LỆNH TRUE -> ĐÁNH DẤU NGÀY HÔM NAY
     // ---------------------------------------------------------
