@@ -1,0 +1,30 @@
+name: Deploy MyWallet to Google
+
+on:
+  push:
+    branches: [ main ] # Sẽ tự động chạy khi bạn lưu code vào nhánh main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lấy code mới nhất từ GitHub
+        uses: actions/checkout@v3
+
+      - name: Thiết lập Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Cài đặt công cụ Clasp
+        run: npm install -g @google/clasp
+
+      - name: Gắn chìa khóa và định vị file Google
+        run: |
+          echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+          echo '{"scriptId":"${{ secrets.SCRIPT_ID }}","rootDir":"."}' > .clasp.json
+
+      - name: Đẩy code và Cập nhật phiên bản trực tiếp
+        run: |
+          clasp push -f
+          clasp deploy -i ${{ secrets.DEPLOYMENT_ID }} -d "Cập nhật tự động từ điện thoại"
