@@ -1,4 +1,4 @@
-name: Deploy MyWallet to Google
+name: Deploy Project VCB1101 to Google
 
 on:
   push:
