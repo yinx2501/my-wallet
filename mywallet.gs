@@ -10,7 +10,7 @@ function doGet(e) {
   var COL_LOG = 16;           
   
   var allParams = Object.keys(e.parameter);
-  var allowedKeys = ["report", "readonly", "grab", "timo", "vi", "_", "traluon", "trasau", "chuyentien", "danhdau"];
+  var allowedKeys = ["report", "readonly", "grab", "timo", "vi", "_", "traluon", "trasau", "chuyentien", "danhdau", "chuyenngay"];
   
   if (allParams.length === 0) return ContentService.createTextOutput("⚠️ Không có dữ liệu.").setMimeType(ContentService.MimeType.TEXT);
 
@@ -26,7 +26,7 @@ function doGet(e) {
     if (k === "report" && val !== "log" && val !== "loan") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'report' chỉ được phép là 'log' hoặc 'loan'.").setMimeType(ContentService.MimeType.TEXT);
     if (k === "danhdau" && val !== "true" && val !== "reset") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'danhdau' chỉ được phép là 'true' hoặc 'reset'.").setMimeType(ContentService.MimeType.TEXT);
 
-    if (colMap.hasOwnProperty(k) || k === 'traluon' || k === 'trasau' || k === 'chuyentien') {
+    if (colMap.hasOwnProperty(k) || k === 'traluon' || k === 'trasau' || k === 'chuyentien' || k === 'chuyenngay') {
       var rawNum = "";
       if (k === 'chuyentien') {
         rawNum = val.replace(/[^0-9]/g, ""); 
@@ -233,8 +233,9 @@ function doGet(e) {
   var walletParams = allParams.filter(function(k) { return colMap.hasOwnProperty(k.toLowerCase()); });
   var debtParams = allParams.filter(function(k) { return k.toLowerCase() === 'traluon' || k.toLowerCase() === 'trasau'; });
   var transferParams = allParams.filter(function(k) { return k.toLowerCase() === 'chuyentien'; });
+  var moveDayParams = allParams.filter(function(k) { return k.toLowerCase() === 'chuyenngay'; });
 
-  if (walletParams.length > 0 || debtParams.length > 0 || transferParams.length > 0) {
+  if (walletParams.length > 0 || debtParams.length > 0 || transferParams.length > 0 || moveDayParams.length > 0) {
     var timeStr = "[" + Utilities.formatDate(now, "GMT+7", "HH:mm") + "]";
     var logMsgArr = [], actionHistory = [];
     
@@ -333,7 +334,28 @@ function doGet(e) {
         }
       });
     }
-
+    if (moveDayParams.length > 0) {
+      moveDayParams.forEach(function(key) {
+        var inputStr = e.parameter[key].toString().trim();
+        var amount = Number(inputStr.replace(/[^0-9.-]/g, ""));
+        
+        if (amount > 0 && row > 2) { // row > 2 để đảm bảo có ngày hôm qua
+          var todayCash = Number(ramRowData[3]) || 0; // ramRowData[3] là cột 4 (Ví tiền mặt)
+          var yesterdayCash = Number(sheet.getRange(row - 1, 4).getValue()) || 0;
+          
+          // Trừ tiền hôm qua, cộng hoàn lại tiền hôm nay
+          sheet.getRange(row - 1, 4).setValue(yesterdayCash - amount);
+          sheet.getRange(row, 4).setValue(todayCash + amount);
+          
+          // Cập nhật lại bộ nhớ RAM cho hôm nay
+          ramRowData[3] = todayCash + amount;
+          
+          var msg = "⏪ Đã bù ngày: Trừ " + amount.toLocaleString('vi-VN') + " vào hôm qua!";
+          logMsgArr.push(msg);
+          actionHistory.push(msg);
+        }
+      });
+    }
     if (logMsgArr.length === 0) return ContentService.createTextOutput("ℹ️ Không có thay đổi nào được thực hiện.").setMimeType(ContentService.MimeType.TEXT);
 
     SpreadsheetApp.flush(); 
