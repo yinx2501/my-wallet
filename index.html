@@ -89,6 +89,8 @@
         button.action-btn { background-color: #0277bd; }
         button.danger-btn { background-color: var(--danger); }
         button.warning-btn { background-color: #f57c00; }
+        /* ĐÃ THÊM: Màu nút bấm bù ngày */
+        button.purple-btn { background-color: #673ab7; }
         
         .input-group {
             display: flex;
@@ -154,7 +156,7 @@
         <div class="card-title">💰 Cập Nhật Biến Động</div>
         <div class="input-group">
             <label>🚗 Grab</label>
-            <input type="number" id="inpGrab" placeholder="Ví dụ: 150000 hoặc 250198...">
+            <input type="number" id="inpGrab" placeholder="Ví dụ: 150000...">
         </div>
         <div class="input-group">
             <label>💳 Timo</label>
@@ -165,6 +167,18 @@
             <input type="number" id="inpVi" placeholder="Số tiền...">
         </div>
         <button class="btn-full" onclick="submitWallets()">🚀 CHỐT SỔ VÍ</button>
+    </div>
+
+    <div class="card">
+        <div class="card-title" style="color: #673ab7; border-bottom: 2px solid #d1c4e9;">⏪ Bù Chi Phí Qua Đêm</div>
+        <div class="subtitle" style="text-align: left; margin-bottom: 10px;">
+            Dùng khi bạn lỡ chốt sót tiền ngày hôm qua. Lệnh này sẽ trừ tiền Ví Tiền Mặt hôm qua và hoàn lại tiền cho hôm nay.
+        </div>
+        <div class="input-group">
+            <label>💸 Số tiền</label>
+            <input type="number" id="inpChuyenNgay" placeholder="Nhập số tiền đã tiêu hôm qua...">
+        </div>
+        <button class="purple-btn btn-full" onclick="submitChuyenNgay()">⏪ XỬ LÝ BÙ NGÀY</button>
     </div>
 
     <div class="card">
@@ -215,7 +229,6 @@
 
         function sendReq(queryString) {
             loader.style.display = "block";
-            // ĐÃ THÊM LỆNH REDIRECT FOLLOW VÀO ĐÂY ĐỂ TRỊ DỨT ĐIỂM LỖI FETCH
             fetch(SCRIPT_URL + "?" + queryString, { method: 'GET', redirect: 'follow' })
                 .then(response => response.text())
                 .then(text => {
@@ -284,6 +297,20 @@
                 return;
             }
             sendReq(query.join("&"));
+        }
+
+        // ĐÃ THÊM: Hàm xử lý sự kiện bấm nút Bù Ngày
+        function submitChuyenNgay() {
+            let amount = document.getElementById("inpChuyenNgay").value.trim();
+
+            if (!amount || amount <= 0) {
+                alert("Vui lòng nhập số tiền cần bù cho ngày hôm qua!");
+                return;
+            }
+
+            if (confirm("⚠️ XÁC NHẬN:\nHệ thống sẽ trừ " + parseInt(amount).toLocaleString('vi-VN') + "đ vào ví Tiền Mặt của NGÀY HÔM QUA, và cộng trả lại số tiền đó cho NGÀY HÔM NAY. Bạn chắc chắn chứ?")) {
+                sendReq("chuyenngay=" + encodeURIComponent(amount));
+            }
         }
 
         function clearInputs() {
