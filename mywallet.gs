@@ -10,7 +10,7 @@ function doGet(e) {
   var COL_LOG = 16;           
   
   var allParams = Object.keys(e.parameter);
-  var allowedKeys = ["report", "readonly", "grab", "timo", "vi", "_", "traluon", "trasau", "chuyentien", "danhdau", "chuyenngay"];
+  var allowedKeys = ["report", "readonly", "grab", "timo", "vi", "_", "traluon", "trasau", "chuyentien", "danhdau"];
   
   if (allParams.length === 0) return ContentService.createTextOutput("⚠️ Không có dữ liệu.").setMimeType(ContentService.MimeType.TEXT);
 
@@ -26,14 +26,16 @@ function doGet(e) {
     if (k === "report" && val !== "log" && val !== "loan") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'report' chỉ được phép là 'log' hoặc 'loan'.").setMimeType(ContentService.MimeType.TEXT);
     if (k === "danhdau" && val !== "true" && val !== "reset") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'danhdau' chỉ được phép là 'true' hoặc 'reset'.").setMimeType(ContentService.MimeType.TEXT);
 
-    if (colMap.hasOwnProperty(k) || k === 'traluon' || k === 'trasau' || k === 'chuyentien' || k === 'chuyenngay') {
+        if (colMap.hasOwnProperty(k) || k === 'traluon' || k === 'trasau' || k === 'chuyentien') {
       var rawNum = "";
       if (k === 'chuyentien') {
         rawNum = val.replace(/[^0-9]/g, ""); 
         if (rawNum.length < 3) return ContentService.createTextOutput("⚠️ LỖI: Cú pháp chuyentien quá ngắn.").setMimeType(ContentService.MimeType.TEXT);
       } else {
-        rawNum = val.replace('250198', '').replace(/[^0-9.-]/g, "");
+        // Cho phép thêm mã bí mật 51098 đi qua bộ lọc
+        rawNum = val.replace('250198', '').replace('51098', '').replace(/[^0-9.-]/g, "");
       }
+
       
       if (rawNum === "" || isNaN(parseFloat(rawNum))) return ContentService.createTextOutput("⚠️ LỖI: Giá trị '" + val + "' không phải là số.").setMimeType(ContentService.MimeType.TEXT);
     }
@@ -233,7 +235,6 @@ function doGet(e) {
   var walletParams = allParams.filter(function(k) { return colMap.hasOwnProperty(k.toLowerCase()); });
   var debtParams = allParams.filter(function(k) { return k.toLowerCase() === 'traluon' || k.toLowerCase() === 'trasau'; });
   var transferParams = allParams.filter(function(k) { return k.toLowerCase() === 'chuyentien'; });
-  var moveDayParams = allParams.filter(function(k) { return k.toLowerCase() === 'chuyenngay'; });
 
   if (walletParams.length > 0 || debtParams.length > 0 || transferParams.length > 0 || moveDayParams.length > 0) {
     var timeStr = "[" + Utilities.formatDate(now, "GMT+7", "HH:mm") + "]";
@@ -242,25 +243,36 @@ function doGet(e) {
     // [TỐI ƯU TỐC ĐỘ]: Đọc 1 lần toàn bộ dữ liệu dòng hiện tại vào RAM (từ cột 1 đến 14)
     var ramRowData = sheet.getRange(row, 1, 1, 14).getValues()[0];
 
-    if (walletParams.length > 0) {
-      walletParams.forEach(function(key) {
+    if (walletParams.forEach(function(key) {
         var k = key.toLowerCase(), inputStr = e.parameter[key].toString().trim();
         var isSetMode = inputStr.startsWith('250198') || inputStr.startsWith('-250198');
-        var valAmount = Number(inputStr.replace('250198', '').replace(/[^0-9.-]/g, ""));
+        var isPrevDayMode = inputStr.startsWith('51098') || inputStr.startsWith('-51098');
         
-        // Trích xuất từ RAM thay vì chọc vào Sheet
-        var oldVal = Number(ramRowData[colMap[k] - 1]) || 0; 
-        var finalVal = isSetMode ? valAmount : oldVal + valAmount;
-        var diff = finalVal - oldVal;
-        
-        if (diff !== 0) {
-          sheet.getRange(row, colMap[k]).setValue(finalVal); 
-          ramRowData[colMap[k] - 1] = finalVal; // Cập nhật lại giá trị mới vào RAM đề phòng lệnh sau cần dùng
+        if (isPrevDayMode) {
+          var valAmount = Number(inputStr.replace('51098', '').replace(/[^0-9.-]/g, ""));
+          if (valAmount !== 0 && row > 2) {
+            var yesterdayVal = Number(sheet.getRange(row - 1, colMap[k]).getValue()) || 0;
+            sheet.getRange(row - 1, colMap[k]).setValue(yesterdayVal - valAmount);
+            
+            var msg = "⏪ Bù ngày " + vnNames[k] + ": Trừ " + Math.abs(valAmount).toLocaleString('vi-VN') + " vào hôm qua!";
+            logMsgArr.push(msg);
+            actionHistory.push(msg);
+          }
+        } else {
+          var valAmount = Number(inputStr.replace('250198', '').replace(/[^0-9.-]/g, ""));
+          var oldVal = Number(ramRowData[colMap[k] - 1]) || 0; 
+          var finalVal = isSetMode ? valAmount : oldVal + valAmount;
+          var diff = finalVal - oldVal;
           
-          logMsgArr.push((isSetMode ? "📍 " : (diff >= 0 ? "➕ " : "➖ ")) + vnNames[k] + ": " + finalVal.toLocaleString('vi-VN') + formatDiff(diff));
-          actionHistory.push((isSetMode ? "📍 " : (diff >= 0 ? "➕ " : "➖ ")) + vnNames[k] + ": " + Math.abs(diff).toLocaleString('vi-VN'));
+          if (diff !== 0) {
+            sheet.getRange(row, colMap[k]).setValue(finalVal); 
+            ramRowData[colMap[k] - 1] = finalVal; 
+            logMsgArr.push((isSetMode ? "📍 " : (diff >= 0 ? "➕ " : "➖ ")) + vnNames[k] + ": " + finalVal.toLocaleString('vi-VN') + formatDiff(diff));
+            actionHistory.push((isSetMode ? "📍 " : (diff >= 0 ? "➕ " : "➖ ")) + vnNames[k] + ": " + Math.abs(diff).toLocaleString('vi-VN'));
+          }
         }
       });
+
     }
 
     if (debtParams.length > 0) {
@@ -334,23 +346,7 @@ function doGet(e) {
         }
       });
     }
-    if (moveDayParams.length > 0) {
-      moveDayParams.forEach(function(key) {
-        var inputStr = e.parameter[key].toString().trim();
-        var amount = Number(inputStr.replace(/[^0-9.-]/g, ""));
-        
-        if (amount > 0 && row > 2) { // row > 2 để đảm bảo có ngày hôm qua
-          var yesterdayCash = Number(sheet.getRange(row - 1, 4).getValue()) || 0;
-          
-          // CHỈ trừ tiền vào ví Tiền Mặt của hôm qua, KHÔNG tác động đến hôm nay
-          sheet.getRange(row - 1, 4).setValue(yesterdayCash - amount);
-          
-          var msg = "⏪ Đã bù ngày: Trừ " + amount.toLocaleString('vi-VN') + " vào hôm qua!";
-          logMsgArr.push(msg);
-          actionHistory.push(msg);
-        }
-      });
-    }
+    
     if (logMsgArr.length === 0) return ContentService.createTextOutput("ℹ️ Không có thay đổi nào được thực hiện.").setMimeType(ContentService.MimeType.TEXT);
 
     SpreadsheetApp.flush(); 
