@@ -340,15 +340,10 @@ function doGet(e) {
         var amount = Number(inputStr.replace(/[^0-9.-]/g, ""));
         
         if (amount > 0 && row > 2) { // row > 2 để đảm bảo có ngày hôm qua
-          var todayCash = Number(ramRowData[3]) || 0; // ramRowData[3] là cột 4 (Ví tiền mặt)
           var yesterdayCash = Number(sheet.getRange(row - 1, 4).getValue()) || 0;
           
-          // Trừ tiền hôm qua, cộng hoàn lại tiền hôm nay
+          // CHỈ trừ tiền vào ví Tiền Mặt của hôm qua, KHÔNG tác động đến hôm nay
           sheet.getRange(row - 1, 4).setValue(yesterdayCash - amount);
-          sheet.getRange(row, 4).setValue(todayCash + amount);
-          
-          // Cập nhật lại bộ nhớ RAM cho hôm nay
-          ramRowData[3] = todayCash + amount;
           
           var msg = "⏪ Đã bù ngày: Trừ " + amount.toLocaleString('vi-VN') + " vào hôm qua!";
           logMsgArr.push(msg);
