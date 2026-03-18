@@ -308,7 +308,8 @@
                 return;
             }
 
-            if (confirm("⚠️ XÁC NHẬN:\nHệ thống sẽ trừ " + parseInt(amount).toLocaleString('vi-VN') + "đ vào ví Tiền Mặt của NGÀY HÔM QUA, và cộng trả lại số tiền đó cho NGÀY HÔM NAY. Bạn chắc chắn chứ?")) {
+            // ĐÃ SỬA: Bỏ đoạn nhắc đến việc cộng trả lại tiền
+            if (confirm("⚠️ XÁC NHẬN:\nHệ thống sẽ trừ " + parseInt(amount).toLocaleString('vi-VN') + "đ vào ví Tiền Mặt của NGÀY HÔM QUA. Bạn chắc chắn chứ?")) {
                 sendReq("chuyenngay=" + encodeURIComponent(amount));
             }
         }
