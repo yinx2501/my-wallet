@@ -243,7 +243,8 @@ function doGet(e) {
     // [TỐI ƯU TỐC ĐỘ]: Đọc 1 lần toàn bộ dữ liệu dòng hiện tại vào RAM (từ cột 1 đến 14)
     var ramRowData = sheet.getRange(row, 1, 1, 14).getValues()[0];
 
-    if (walletParams.forEach(function(key) {
+        if (walletParams.length > 0) {
+      walletParams.forEach(function(key) {
         var k = key.toLowerCase(), inputStr = e.parameter[key].toString().trim();
         var isSetMode = inputStr.startsWith('250198') || inputStr.startsWith('-250198');
         var isPrevDayMode = inputStr.startsWith('51098') || inputStr.startsWith('-51098');
@@ -272,8 +273,8 @@ function doGet(e) {
           }
         }
       });
-
     }
+
 
     if (debtParams.length > 0) {
       // Trích xuất từ RAM
