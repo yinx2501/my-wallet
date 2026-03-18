@@ -255,7 +255,7 @@ function doGet(e) {
             var yesterdayVal = Number(sheet.getRange(row - 1, colMap[k]).getValue()) || 0;
             sheet.getRange(row - 1, colMap[k]).setValue(yesterdayVal - valAmount);
             
-            var msg = "⏪ Bù ngày " + vnNames[k] + ": Trừ " + Math.abs(valAmount).toLocaleString('vi-VN') + " vào hôm qua!";
+            var msg = "⏪ Đã bù ngày " + vnNames[k] + ": Trừ " + Math.abs(valAmount).toLocaleString('vi-VN') + " vào hôm qua!";
             logMsgArr.push(msg);
             actionHistory.push(msg);
           }
