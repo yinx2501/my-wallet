@@ -8,23 +8,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Lấy code mới nhất từ GitHub
+      - name: Fetch and pull the latest code from GitHub
         uses: actions/checkout@v3
 
-      - name: Thiết lập Node.js
+      - name: Configure Node.js environment
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Cài đặt công cụ Clasp
+      - name: Install the Clasp CLI tool
         run: npm install -g @google/clasp
 
-      - name: Gắn chìa khóa và định vị file Google
+      - name: Set up credentials and map project files
         run: |
           echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
           echo '{"scriptId":"${{ secrets.SCRIPT_ID }}","rootDir":"."}' > .clasp.json
 
-      - name: Đẩy code và Cập nhật phiên bản trực tiếp
+      - name: Push code and deploy the live version
         run: |
           clasp push -f
           clasp deploy -i ${{ secrets.DEPLOYMENT_ID }} -d "Cập nhật tự động từ điện thoại"
