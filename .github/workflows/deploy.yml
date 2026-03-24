@@ -2,19 +2,32 @@ name: Deploy Project VCB1101 to Google
 
 on:
   push:
-    branches: [ main ] # Sẽ tự động chạy khi bạn lưu code vào nhánh main
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
+
     steps:
       - name: Fetch and pull the latest code from GitHub
         uses: actions/checkout@v4
 
+      # BƯỚC MỚI: Kiểm tra xem file .gs có thay đổi không
+      - name: Check for changes in mywallet.gs
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            backend:
+              - 'mywallet.gs'
+              - '.clasp.json'
+
       - name: Configure Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install the Clasp CLI tool
         run: npm install -g @google/clasp
@@ -24,7 +37,14 @@ jobs:
           echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
           echo '{"scriptId":"${{ secrets.SCRIPT_ID }}","rootDir":"."}' > .clasp.json
 
+      # CHỈ CHẠY PUSH VÀ DEPLOY NẾU FILE .GS CÓ THAY ĐỔI
       - name: Push code and deploy the live version
+        if: steps.filter.outputs.backend == 'true'
         run: |
           clasp push -f
-          clasp deploy -i ${{ secrets.DEPLOYMENT_ID }} -d "Cập nhật tự động từ điện thoại"
+          clasp deploy -i ${{ secrets.DEPLOYMENT_ID }} -d "Cập nhật tự động: Chỉ khi backend thay đổi"
+
+      # THÔNG BÁO NẾU KHÔNG CÓ THAY ĐỔI (Tùy chọn)
+      - name: Skip Deploy
+        if: steps.filter.outputs.backend == 'false'
+        run: echo "Không có thay đổi trong file .gs, bỏ qua bước deploy lên Google."
