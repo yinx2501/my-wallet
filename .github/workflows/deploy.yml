@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy-backend:
+  deploy:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
@@ -14,8 +14,7 @@ jobs:
       - name: Fetch code
         uses: actions/checkout@v4
 
-      # Kiểm tra riêng sự thay đổi của file logic backend
-      - name: Check for Backend changes
+      - name: Check for changes
         id: filter
         uses: dorny/paths-filter@v3
         with:
@@ -23,29 +22,39 @@ jobs:
             backend:
               - 'mywallet.gs'
               - 'appsscript.json'
+            frontend:
+              - 'index.html'
 
       - name: Configure Node.js
-        if: steps.filter.outputs.backend == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install Clasp
-        if: steps.filter.outputs.backend == 'true'
-        run: npm install -g @google/clasp
+      # --- PHẦN TỐI ƯU FRONTEND (GITHUB PAGES) ---
+      - name: Minify HTML/JS for GitHub Pages
+        if: steps.filter.outputs.frontend == 'true'
+        run: |
+          npm install -g html-minifier-terser
+          html-minifier-terser --collapse-whitespace --remove-comments --minify-js true --minify-css true index.html -o index.html
+          
+      - name: Commit Minified HTML
+        if: steps.filter.outputs.frontend == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "⚡ Optimize: Minify index.html for performance" || echo "No changes to commit"
+          git push
 
-      - name: Set up Clasp credentials
+      # --- PHẦN DEPLOY BACKEND (GOOGLE APP SCRIPT) ---
+      - name: Install Clasp & Deploy Backend
         if: steps.filter.outputs.backend == 'true'
         run: |
+          npm install -g @google/clasp
           echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
           echo '{"scriptId":"${{ secrets.SCRIPT_ID }}","rootDir":"."}' > .clasp.json
-
-      - name: Push to Google Apps Script
-        if: steps.filter.outputs.backend == 'true'
-        run: |
           clasp push -f
           clasp deploy -i ${{ secrets.DEPLOYMENT_ID }} -d "Cập nhật logic hệ thống"
 
-      - name: Skip Message
-        if: steps.filter.outputs.backend == 'false'
-        run: echo "Chỉ có thay đổi giao diện, không cần cập nhật Google Backend."
+      - name: Final Status
+        run: echo "Quy trình hoàn tất: Backend (${{ steps.filter.outputs.backend }}), Frontend (${{ steps.filter.outputs.frontend }})"
