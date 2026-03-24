@@ -133,14 +133,17 @@
 
     <div id="resultBox">Sẵn sàng nhận lệnh!</div>
 
-    <div class="card">
-        <div class="card-title">📊 Tra Cứu Nhanh</div>
-        <div class="btn-grid btn-grid-3">
-            <button class="action-btn" onclick="sendReq('readonly=true')">SỐ DƯ</button>
-            <button class="action-btn" onclick="sendReq('report=log')">NHẬT KÝ</button>
-            <button class="action-btn" onclick="sendReq('report=loan')">KHOẢN VAY</button>
-        </div>
+<div class="card">
+    <div class="card-title">📊 Tra Cứu Nhanh</div>
+    <div class="btn-grid" style="margin-bottom: 10px;">
+        <button class="action-btn" onclick="sendReq('readonly=true')">SỐ DƯ</button>
+        <button class="action-btn" onclick="sendReq('report=log')">NHẬT KÝ</button>
     </div>
+    <div class="btn-grid">
+        <button class="action-btn" onclick="sendReq('report=loan')">KHOẢN VAY</button>
+        <button class="action-btn" style="background-color: #455a64;" onclick="sendReq('report=last2')">📑 BẢNG 2 DÒNG CUỐI</button>
+    </div>
+</div>
 
     <div class="card">
         <div class="card-title">⏳ Khoản Vay 50 Ngày (Sheet2)</div>
@@ -220,13 +223,13 @@
                 .then(response => response.text())
                 .then(text => {
                     loader.style.display = "none";
-                    resultBox.innerText = text;
+                    resultBox.innerHTML = text;
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     clearInputs();
                 })
                 .catch(error => {
                     loader.style.display = "none";
-                    resultBox.innerText = "❌ Lỗi kết nối mạng: " + error;
+                    resultBox.innerHTML = "❌ Lỗi kết nối mạng: " + error;
                 });
         }
 
