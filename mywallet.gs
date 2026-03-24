@@ -23,7 +23,7 @@ function doGet(e) {
     
     // Chặn nghiêm ngặt giá trị của readonly, danhdau và report
     if (k === "readonly" && val !== "true") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'readonly' chỉ được phép là 'true'.").setMimeType(ContentService.MimeType.TEXT);
-    if (k === "report" && val !== "log" && val !== "loan") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'report' chỉ được phép là 'log' hoặc 'loan'.").setMimeType(ContentService.MimeType.TEXT);
+    if (k === "report" && val !== "log" && val !== "loan" && val !== "last2") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'report' chỉ được phép là 'log', 'loan' hoặc 'last2'.").setMimeType(ContentService.MimeType.TEXT);
     if (k === "danhdau" && val !== "true" && val !== "reset") return ContentService.createTextOutput("⚠️ LỖI: Giá trị của 'danhdau' chỉ được phép là 'true' hoặc 'reset'.").setMimeType(ContentService.MimeType.TEXT);
 
         if (colMap.hasOwnProperty(k) || k === 'traluon' || k === 'trasau' || k === 'chuyentien') {
@@ -203,6 +203,37 @@ function doGet(e) {
       "⏳ Tổng ngày còn lại: " + summaryVals[2] + "\n" +
       "📉 Tổng tiền còn lại: " + summaryVals[3]
     ).setMimeType(ContentService.MimeType.TEXT);
+  }
+if (e.parameter.report === "last2") {
+    var lRow = sheet.getLastRow();
+    var lastCol = sheet.getLastColumn();
+    if (lRow < 2) return ContentService.createTextOutput("⚠️ Dữ liệu trống.").setMimeType(ContentService.MimeType.TEXT);
+    
+    var startRow = Math.max(2, lRow - 1); 
+    var numRows = lRow - startRow + 1;
+    var headers = sheet.getRange(1, 1, 1, lastCol).getDisplayValues()[0];
+    var dataRows = sheet.getRange(startRow, 1, numRows, lastCol).getDisplayValues();
+    
+    // Tạo bảng HTML tối ưu cho màn hình điện thoại (có cuộn ngang)
+    var html = "📊 <b>CHI TIẾT 2 DÒNG CUỐI</b><br><br>";
+    html += "<div style='overflow-x:auto; border-radius: 8px;'><table style='width:100%; border-collapse: collapse; font-size: 12px; text-align: center;'>";
+    
+    html += "<tr style='background-color: #1b5e20; color: white;'>";
+    for (var c = 0; c < headers.length; c++) {
+      html += "<th style='border: 1px solid #444; padding: 8px; white-space: nowrap;'>" + (headers[c] || "-") + "</th>";
+    }
+    html += "</tr>";
+    
+    for (var r = 0; r < dataRows.length; r++) {
+      html += "<tr>";
+      for (var c = 0; c < dataRows[r].length; c++) {
+        html += "<td style='border: 1px solid #444; padding: 8px; white-space: nowrap; color: #00e676;'>" + dataRows[r][c] + "</td>";
+      }
+      html += "</tr>";
+    }
+    html += "</table></div><br><small style='color:#888'>* Vuốt ngang để xem hết các cột</small>";
+    
+    return ContentService.createTextOutput(html).setMimeType(ContentService.MimeType.TEXT);
   }
   if (e.parameter.readonly === "true" || e.parameter.readOnly === "true") {
     var rowVals = sheet.getRange(row, 1, 1, COL_TOTAL_DISPLAY).getValues()[0];
