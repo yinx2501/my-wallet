@@ -209,38 +209,42 @@ if (e.parameter.report === "last2") {
     var lastCol = sheet.getLastColumn();
     if (lRow < 2) return ContentService.createTextOutput("⚠️ Dữ liệu trống.").setMimeType(ContentService.MimeType.TEXT);
     
-    var startRow = Math.max(2, lRow - 1); 
-    var numRows = lRow - startRow + 1;
-    
-    // Lấy tiêu đề và dữ liệu
+    // Chỉ lấy đúng 1 dòng cuối cùng
     var headers = sheet.getRange(1, 1, 1, lastCol).getDisplayValues()[0];
-    var dataRows = sheet.getRange(startRow, 1, numRows, lastCol).getDisplayValues();
+    var lastRowData = sheet.getRange(lRow, 1, 1, lastCol).getDisplayValues()[0];
     
-    // Danh sách các cột CẦN LOẠI BỎ (Số thứ tự cột: E=5, F=6, H=8, P=16)
+    // Cấu hình lọc và tô sáng (Cột I=9, N=14, O=15, E=5, F=6, H=8, P=16)
     var excludeCols = [5, 6, 8, 16];
+    var highlightCols = [9, 14, 15]; 
     
-    var html = "📊 <b>CHI TIẾT 2 DÒNG CUỐI (Đã lọc)</b><br><br>";
-    html += "<div style='overflow-x:auto; border-radius: 8px;'><table style='width:100%; border-collapse: collapse; font-size: 12px; text-align: center;'>";
+    var html = "📊 <b>DÒNG CUỐI CÙNG</b><br><br>";
+    html += "<div style='overflow-x:auto; border-radius: 8px; border: 1px solid #444;'><table style='width:100%; border-collapse: collapse; font-size: 12px; text-align: center;'>";
     
-    // Tạo Header (Bỏ qua cột E, F, H, P)
+    // --- Header ---
     html += "<tr style='background-color: #1b5e20; color: white;'>";
     for (var c = 0; c < headers.length; c++) {
-      if (excludeCols.indexOf(c + 1) !== -1) continue; // Bỏ qua cột trong danh sách loại trừ
-      html += "<th style='border: 1px solid #444; padding: 8px; white-space: nowrap;'>" + (headers[c] || "-") + "</th>";
+      if (excludeCols.indexOf(c + 1) !== -1) continue;
+      var style = "border: 1px solid #444; padding: 10px; white-space: nowrap;";
+      if (highlightCols.indexOf(c + 1) !== -1) style += "background-color: #2e7d32; color: #ffff00;";
+      html += "<th style='" + style + "'>" + (headers[c] || "-") + "</th>";
     }
     html += "</tr>";
     
-    // Tạo Dữ liệu (Bỏ qua cột E, F, H, P)
-    for (var r = 0; r < dataRows.length; r++) {
-      html += "<tr>";
-      for (var c = 0; c < dataRows[r].length; c++) {
-        if (excludeCols.indexOf(c + 1) !== -1) continue; // Bỏ qua cột trong danh sách loại trừ
-        var cellVal = dataRows[r][c];
-        html += "<td style='border: 1px solid #444; padding: 8px; white-space: nowrap; color: #00e676;'>" + cellVal + "</td>";
+    // --- Dữ liệu (Chỉ 1 dòng duy nhất) ---
+    html += "<tr>";
+    for (var c = 0; c < lastRowData.length; c++) {
+      if (excludeCols.indexOf(c + 1) !== -1) continue;
+      
+      var isHighlight = (highlightCols.indexOf(c + 1) !== -1);
+      var cellStyle = "border: 1px solid #444; padding: 12px 10px; white-space: nowrap; color: #00e676;";
+      
+      if (isHighlight) {
+        cellStyle = "border: 1px solid #444; padding: 12px 10px; white-space: nowrap; color: #ffffff; background-color: rgba(46, 125, 50, 0.4); font-weight: bold;";
       }
-      html += "</tr>";
+      
+      html += "<td style='" + cellStyle + "'>" + lastRowData[c] + "</td>";
     }
-    html += "</table></div><br><small style='color:#888'>* Đã ẩn cột E, F, H, P để tối ưu hiển thị.</small>";
+    html += "</tr></table></div>";
     
     return ContentService.createTextOutput(html).setMimeType(ContentService.MimeType.TEXT);
   }
