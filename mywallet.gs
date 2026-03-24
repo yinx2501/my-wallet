@@ -211,27 +211,36 @@ if (e.parameter.report === "last2") {
     
     var startRow = Math.max(2, lRow - 1); 
     var numRows = lRow - startRow + 1;
+    
+    // Lấy tiêu đề và dữ liệu
     var headers = sheet.getRange(1, 1, 1, lastCol).getDisplayValues()[0];
     var dataRows = sheet.getRange(startRow, 1, numRows, lastCol).getDisplayValues();
     
-    // Tạo bảng HTML tối ưu cho màn hình điện thoại (có cuộn ngang)
-    var html = "📊 <b>CHI TIẾT 2 DÒNG CUỐI</b><br><br>";
+    // Danh sách các cột CẦN LOẠI BỎ (Số thứ tự cột: E=5, F=6, H=8, P=16)
+    var excludeCols = [5, 6, 8, 16];
+    
+    var html = "📊 <b>CHI TIẾT 2 DÒNG CUỐI (Đã lọc)</b><br><br>";
     html += "<div style='overflow-x:auto; border-radius: 8px;'><table style='width:100%; border-collapse: collapse; font-size: 12px; text-align: center;'>";
     
+    // Tạo Header (Bỏ qua cột E, F, H, P)
     html += "<tr style='background-color: #1b5e20; color: white;'>";
     for (var c = 0; c < headers.length; c++) {
+      if (excludeCols.indexOf(c + 1) !== -1) continue; // Bỏ qua cột trong danh sách loại trừ
       html += "<th style='border: 1px solid #444; padding: 8px; white-space: nowrap;'>" + (headers[c] || "-") + "</th>";
     }
     html += "</tr>";
     
+    // Tạo Dữ liệu (Bỏ qua cột E, F, H, P)
     for (var r = 0; r < dataRows.length; r++) {
       html += "<tr>";
       for (var c = 0; c < dataRows[r].length; c++) {
-        html += "<td style='border: 1px solid #444; padding: 8px; white-space: nowrap; color: #00e676;'>" + dataRows[r][c] + "</td>";
+        if (excludeCols.indexOf(c + 1) !== -1) continue; // Bỏ qua cột trong danh sách loại trừ
+        var cellVal = dataRows[r][c];
+        html += "<td style='border: 1px solid #444; padding: 8px; white-space: nowrap; color: #00e676;'>" + cellVal + "</td>";
       }
       html += "</tr>";
     }
-    html += "</table></div><br><small style='color:#888'>* Vuốt ngang để xem hết các cột</small>";
+    html += "</table></div><br><small style='color:#888'>* Đã ẩn cột E, F, H, P để tối ưu hiển thị.</small>";
     
     return ContentService.createTextOutput(html).setMimeType(ContentService.MimeType.TEXT);
   }
