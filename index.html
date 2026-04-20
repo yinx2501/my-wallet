@@ -1,1 +1,290 @@
-<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MyWallet Web Dashboard</title><style>:root{--bg-color:#f0f2f5;--card-bg:#ffffff;--primary:#2e7d32;--text-main:#333333;--border:#e0e0e0;--tab-inactive:#546e7a;--result-bg:#263238;--danger:#d32f2f;--radius:16px}*{font-family:system-ui,-apple-system,sans-serif;box-sizing:border-box}body{background-color:var(--bg-color);margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh}.web-container{width:100%;max-width:1200px;display:flex;gap:20px;padding:20px;flex-direction:row}.display-panel{flex:1.2;background-color:var(--result-bg);border-radius:var(--radius);padding:25px;color:#00e676;box-shadow:0 10px 30px rgba(0,0,0,.2);position:sticky;top:20px;height:calc(100vh - 40px);display:flex;flex-direction:column}.display-panel h3{color:#81c784;margin:0 0 15px 0;font-size:14px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #37474f;padding-bottom:10px}#resultBox{flex:1;font-size:15px;white-space:pre-wrap;overflow-y:auto;line-height:1.6}.control-panel{flex:1;background:var(--bg-color);display:flex;flex-direction:column;gap:20px}.tab-nav{display:flex;background:#fff;border-radius:var(--radius);padding:8px;gap:5px;box-shadow:0 4px 12px rgba(0,0,0,.05)}.tab-btn{flex:1;padding:12px;border:none;background:0 0;font-size:12px;font-weight:700;color:var(--tab-inactive);cursor:pointer;border-radius:10px;transition:.3s;text-transform:uppercase}.tab-btn.active{background:var(--primary);color:#fff}.card{background:var(--card-bg);border-radius:var(--radius);padding:20px;border:1px solid var(--border);box-shadow:0 4px 15px rgba(0,0,0,.05)}.card-title{font-weight:800;font-size:12px;margin-bottom:20px;color:#1565c0;text-transform:uppercase;text-align:center}.btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}button{background-color:var(--primary);color:#fff;border:none;padding:15px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-align:center;width:100%}button:active{transform:scale(.95)}.action-btn{background-color:#0277bd}.danger-btn{background-color:var(--danger)}.warning-btn{background-color:#f57c00}.input-group{display:flex;flex-direction:column;margin-bottom:15px}.input-group label{font-size:12px;font-weight:700;margin-bottom:8px;color:#666;padding-left:5px}.input-group input,.input-group select{padding:12px;border:1.5px solid var(--border);border-radius:10px;font-size:16px;text-align:center}@media (max-width:850px){.web-container{flex-direction:column;padding:10px}.display-panel{height:350px;position:static;order:1}.control-panel{order:2}.tab-nav{position:sticky;top:10px;z-index:100}}#loader{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;justify-content:center;align-items:center;color:#fff;font-weight:800;border-radius:inherit}</style></head><body><div id="loader">⚡ ĐANG XỬ LÝ...</div><div class="web-container"><div class="display-panel"><h3>Dữ liệu ví tiền</h3><div id="resultBox">Đang tải dữ liệu từ Google Sheets...</div></div><div class="control-panel"><div class="tab-nav"><button class="tab-btn active" onclick='openTab(event,"tracuu")'>📊 Tra cứu</button> <button class="tab-btn" onclick='openTab(event,"capnhat")'>💰 Ví tiền</button> <button class="tab-btn" onclick='openTab(event,"no")'>⏳ Nợ</button> <button class="tab-btn" onclick='openTab(event,"ketoan")'>📓 Kế toán</button></div><div id="tracuu" class="tab-content"><div class="card"><div class="card-title">Truy vấn nhanh</div><div class="btn-grid"><button class="action-btn" onclick='sendReq("readonly=true")'>SỐ DƯ</button> <button class="action-btn" onclick='sendReq("report=log")'>NHẬT KÝ</button> <button class="action-btn" onclick='sendReq("report=loan")'>DS VAY</button> <button class="action-btn" style="background:#455a64" onclick='sendReq("report=last2")'>XEM BẢNG</button></div></div></div><div id="capnhat" class="tab-content" style="display:none"><div class="card"><div class="card-title">Cập nhật ví</div><div class="input-group"><label>🚗 Grab</label><input type="number" id="inpGrab"></div><div class="input-group"><label>💳 Timo</label><input type="number" id="inpTimo"></div><div class="input-group"><label>💵 Ví mặt</label><input type="number" id="inpVi"></div><button onclick="chotSo()">🚀 CHỐT SỔ HÔM NAY</button></div></div></div></div><script>const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx3H6ZBP77KEwMXfqdBgmpImVufFgQSAx8MtMrPxdGgp0pRYaHgvoaCji_HfvDbBMuuHQ/exec";function openTab(e,t){let n=document.getElementsByClassName("tab-content");for(let e=0;e<n.length;e++)n[e].style.display="none";let l=document.getElementsByClassName("tab-btn");for(let e=0;e<l.length;e++)l[e].className=l[e].className.replace(" active","");document.getElementById(t).style.display="block",e.currentTarget.className+=" active"}async function sendReq(e){document.getElementById("loader").style.display="flex";try{const t=await fetch(SCRIPT_URL+"?"+e),n=await t.text();document.getElementById("resultBox").innerHTML=n}catch(e){document.getElementById("resultBox").innerHTML="Lỗi: "+e}document.getElementById("loader").style.display="none"}function chotSo(){let e=[];document.getElementById("inpGrab").value&&e.push("grab="+document.getElementById("inpGrab").value),document.getElementById("inpTimo").value&&e.push("timo="+document.getElementById("inpTimo").value),document.getElementById("inpVi").value&&e.push("vi="+document.getElementById("inpVi").value),e.length?sendReq(e.join("&")):alert("Nhập ít nhất 1 ví!")}window.onload=()=>sendReq("readonly=true")</script></body></html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MyWallet Dashboard by YINX</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --primary: #2e7d32;
+            --primary-hover: #1b5e20;
+            --danger: #d32f2f;
+            --text-main: #333333;
+            --border: #e0e0e0;
+            --result-bg: #263238;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 10px;
+        }
+
+        /* Container tổng quát */
+        .main-container {
+            display: flex;
+            flex-direction: column; /* Mặc định cho mobile */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* PANEL TRÁI (Kết quả) */
+        .left-panel {
+            width: 100%;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        h2 { color: var(--primary); margin: 0; }
+        .subtitle { font-size: 13px; color: #666; }
+
+        #resultBox {
+            background-color: var(--result-bg);
+            color: #00e676;
+            padding: 15px;
+            border-radius: 10px;
+            min-height: 100px;
+            font-size: 15px;
+            white-space: pre-wrap;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            border-left: 5px solid #00e676;
+        }
+
+        /* PANEL PHẢI (Điều khiển) */
+        .right-panel {
+            width: 100%;
+        }
+
+        /* Cấu trúc Card */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.05);
+            border: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #1565c0;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Tiện ích Layout */
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        button {
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+            width: 100%;
+        }
+
+        button:active { transform: scale(.97); }
+        button.action-btn { background-color: #0277bd; }
+        button.danger-btn { background-color: var(--danger); }
+        button.warning-btn { background-color: #f57c00; }
+
+        .input-group { display: flex; align-items: center; margin-bottom: 10px; }
+        .input-group label { width: 90px; font-size: 14px; font-weight: 500; }
+        .input-group input, .input-group select {
+            flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px;
+            font-size: 16px; background-color: #fff;
+        }
+
+        .btn-full { width: 100%; margin-top: 10px; padding: 14px; font-size: 15px; }
+
+        #loader {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,.8); z-index: 999; text-align: center;
+            padding-top: 50vh; font-weight: 700; color: var(--primary);
+        }
+
+        /* CSS CHO PC (Bắt đầu chia 2 Panel) */
+        @media (min-width: 850px) {
+            body { padding: 30px; }
+            .main-container {
+                flex-direction: row; /* Chuyển sang hàng ngang */
+                align-items: flex-start;
+            }
+            .left-panel {
+                flex: 1; /* Chiếm 40-45% */
+                position: sticky; /* Giữ cố định khi cuộn */
+                top: 30px;
+            }
+            .right-panel {
+                flex: 1.2; /* Chiếm phần còn lại */
+            }
+            #resultBox {
+                height: calc(100vh - 180px); /* Tự động giãn theo chiều cao màn hình */
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">⏳ Đang xử lý...</div>
+
+    <div class="main-container">
+        <div class="left-panel">
+            <div class="header-section">
+                <h2>MyWallet</h2>
+                <div class="subtitle">Dashboard by YINX</div>
+            </div>
+            <div id="resultBox">Sẵn sàng nhận lệnh!</div>
+        </div>
+
+        <div class="right-panel">
+            <div class="card">
+                <div class="card-title">📊 Tra Cứu Nhanh</div>
+                <div class="btn-grid" style="margin-bottom:10px">
+                    <button class="action-btn" onclick='sendReq("readonly=true")'>SỐ DƯ</button>
+                    <button class="action-btn" onclick='sendReq("report=log")'>NHẬT KÝ</button>
+                </div>
+                <div class="btn-grid">
+                    <button class="action-btn" onclick='sendReq("report=loan")'>KHOẢN VAY</button>
+                    <button class="action-btn" style="background-color:#455a64" onclick='sendReq("report=last2")'>XEM BẢNG</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">⏳ Khoản Vay 50 Ngày (Sheet2)</div>
+                <div class="btn-grid">
+                    <button onclick='sendReq("danhdau=true")'>✅ Đã Chuyển Hôm Nay</button>
+                    <button class="danger-btn" onclick="confirmReset()">🔄 Reset Chu Kỳ Mới</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💰 Cập Nhật Biến Động</div>
+                <div class="input-group">
+                    <label>🚗 Grab</label>
+                    <input type="number" id="inpGrab" placeholder="Tiền hoặc mã 51098...">
+                </div>
+                <div class="input-group">
+                    <label>💳 Timo</label>
+                    <input type="number" id="inpTimo" placeholder="Số tiền...">
+                </div>
+                <div class="input-group">
+                    <label>💵 Tiền mặt</label>
+                    <input type="number" id="inpVi" placeholder="Số tiền...">
+                </div>
+                <button class="btn-full" onclick="submitWallets()">🚀 CHỐT SỔ VÍ</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🔄 Luân Chuyển Nội Bộ</div>
+                <div class="btn-grid" style="margin-bottom:12px">
+                    <div>
+                        <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">NGUỒN:</label>
+                        <select id="selFrom"><option value="1">Grab</option><option value="2">Timo</option><option value="3">Tiền mặt</option></select>
+                    </div>
+                    <div>
+                        <label style="font-size:11px;font-weight:700;color:#666;display:block;margin-bottom:4px">ĐÍCH:</label>
+                        <select id="selTo"><option value="2">Timo</option><option value="1">Grab</option><option value="3">Tiền mặt</option></select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>🔄 Số tiền</label>
+                    <input type="number" id="inpChuyenTien" placeholder="Nhập số tiền...">
+                </div>
+                <button class="action-btn btn-full" onclick="submitTransfer()">🚀 THỰC HIỆN CHUYỂN</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📓 Kế Toán & Ghi Nợ</div>
+                <div class="input-group">
+                    <label>💸 Trả luôn</label>
+                    <input type="number" id="inpTraLuon" placeholder="Trừ tiền ngay">
+                </div>
+                <div class="input-group">
+                    <label>📝 Trả sau</label>
+                    <input type="number" id="inpTraSau" placeholder="Chỉ ghi nợ">
+                </div>
+                <button class="warning-btn btn-full" onclick="submitAccounting()">⚡ XỬ LÝ KẾ TOÁN</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx3H6ZBP77KEwMXfqdBgmpImVufFgQSAx8MtMrPxdGgp0pRYaHgvoaCji_HfvDbBMuuHQ/exec";
+        const resultBox = document.getElementById("resultBox");
+        const loader = document.getElementById("loader");
+
+        function sendReq(e) {
+            loader.style.display = "block";
+            fetch(SCRIPT_URL + "?" + e, { method: "GET", redirect: "follow" })
+                .then(res => res.text())
+                .then(data => {
+                    loader.style.display = "none";
+                    resultBox.innerHTML = data;
+                    // Trên PC không cần scroll lên đầu vì bảng kết quả luôn hiện diện
+                    if (window.innerWidth < 850) {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                    clearInputs();
+                })
+                .catch(err => {
+                    loader.style.display = "none";
+                    resultBox.innerHTML = "❌ Lỗi kết nối mạng: " + err;
+                });
+        }
+
+        function confirmReset() {
+            confirm("⚠️ BẠN CÓ CHẮC CHẮN MUỐN RESET?\nHành động này sẽ xóa các ngày cũ ở Sheet2 và bắt đầu chu kỳ 50 ngày mới từ hôm nay!") && sendReq("danhdau=reset");
+        }
+
+        function submitWallets() {
+            let e = [], n = document.getElementById("inpGrab").value.trim(), t = document.getElementById("inpTimo").value.trim(), o = document.getElementById("inpVi").value.trim();
+            n && e.push("grab=" + encodeURIComponent(n));
+            t && e.push("timo=" + encodeURIComponent(t));
+            o && e.push("vi=" + encodeURIComponent(o));
+            0 !== e.length ? sendReq(e.join("&")) : alert("Vui lòng nhập ít nhất 1 số tiền để cập nhật ví!");
+        }
+
+        function submitTransfer() {
+            let e = document.getElementById("selFrom").value, n = document.getElementById("selTo").value, t = document.getElementById("inpChuyenTien").value.trim();
+            !t || t <= 0 ? alert("Vui lòng nhập số tiền cần chuyển!") : e !== n ? sendReq("chuyentien=" + encodeURIComponent(e + n + t)) : alert("Lỗi: Ví nguồn và ví đích không được trùng nhau!");
+        }
+
+        function submitAccounting() {
+            let e = [], n = document.getElementById("inpTraLuon").value.trim(), t = document.getElementById("inpTraSau").value.trim();
+            n && e.push("traluon=" + encodeURIComponent(n));
+            t && e.push("trasau=" + encodeURIComponent(t));
+            0 !== e.length ? sendReq(e.join("&")) : alert("Vui lòng nhập số liệu kế toán!");
+        }
+
+        function clearInputs() {
+            document.querySelectorAll('input[type="number"]').forEach(e => e.value = "");
+        }
+
+        window.onload = function () { sendReq("readonly=true"); }
+    </script>
+</body>
+</html>
