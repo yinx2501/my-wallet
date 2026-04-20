@@ -1,5 +1,4 @@
-name: Deploy Project VCB1101 to Google
-
+name: My Wallet
 on:
   push:
     branches: [ main ]
