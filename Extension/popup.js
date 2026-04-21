@@ -85,3 +85,60 @@ document.addEventListener("DOMContentLoaded", function() {
         q.length ? sendReq(q.join("&")) : alert("Nhập số liệu nợ!");
     };
 });
+// --- POPUP: ĐIỀU KHIỂN NHẠC NỀN ---
+const btnToggle = document.getElementById('toggleMusic');
+const sliVolume = document.getElementById('volumeSlider');
+const txtVolVal = document.getElementById('volValue');
+
+// Khôi phục trạng thái nút bấm và âm lượng khi mở Popup
+chrome.storage.local.get(['isManuallyPaused', 'userVolume'], (res) => {
+    let isPaused = res.isManuallyPaused || false;
+    let vol = res.userVolume !== undefined ? res.userVolume : 30; // Mặc định 30%
+
+    // Áp dụng lên giao diện ngay khi mở
+    if (btnToggle) {
+        btnToggle.innerText = isPaused ? "▶" : "⏸";
+        btnToggle.style.backgroundColor = isPaused ? "#455a64" : "var(--primary)";
+    }
+    if (sliVolume) {
+        sliVolume.value = vol;
+        if (txtVolVal) txtVolVal.innerText = vol + "%";
+        // Gửi lệnh set volume lúc khởi động
+        chrome.runtime.sendMessage({ from: 'popup', action: 'volume', value: vol / 100 });
+    }
+
+    // Xử lý khi click vào nút Dừng/Phát
+    if (btnToggle) {
+        btnToggle.onclick = () => {
+            isPaused = !isPaused; // Đảo ngược trạng thái
+
+            // Đổi icon và màu sắc ngay lập tức cho mượt
+            btnToggle.innerText = isPaused ? "▶" : "⏸";
+            btnToggle.style.backgroundColor = isPaused ? "#455a64" : "var(--primary)";
+
+            // Lưu vào bộ nhớ và RA LỆNH cho Background
+            chrome.storage.local.set({ isManuallyPaused: isPaused });
+            chrome.runtime.sendMessage({
+                from: 'popup',     // Gắn nhãn để Background biết
+                action: 'toggle',
+                isPausing: isPaused // Gửi thẳng trạng thái cần thiết
+            });
+        };
+    }
+
+    // Xử lý khi kéo thanh âm lượng
+    if (sliVolume) {
+        sliVolume.oninput = () => {
+            const val = sliVolume.value;
+            if (txtVolVal) txtVolVal.innerText = val + "%";
+            
+            // Lưu bộ nhớ và gửi lệnh set volume
+            chrome.storage.local.set({ userVolume: val });
+            chrome.runtime.sendMessage({
+                from: 'popup',
+                action: 'volume',
+                value: val / 100
+            });
+        };
+    }
+});

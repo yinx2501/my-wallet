@@ -23,7 +23,9 @@
   },
   "permissions": [
     "storage",
-    "alarms"
+    "alarms",
+    "offscreen",
+    "tabs"
   ],
   "host_permissions": [
     "https://script.google.com/*",
