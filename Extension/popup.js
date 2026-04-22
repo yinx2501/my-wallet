@@ -93,7 +93,7 @@ const txtVolVal = document.getElementById('volValue');
 // Khôi phục trạng thái nút bấm và âm lượng khi mở Popup
 chrome.storage.local.get(['isManuallyPaused', 'userVolume'], (res) => {
     let isPaused = res.isManuallyPaused || false;
-    let vol = res.userVolume !== undefined ? res.userVolume : 30; // Mặc định 30%
+    let vol = res.userVolume !== undefined ? res.userVolume : 15; // Mặc định 30%
 
     // Áp dụng lên giao diện ngay khi mở
     if (btnToggle) {

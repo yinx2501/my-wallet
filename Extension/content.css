@@ -1,0 +1,96 @@
+/* 1. Reset toàn bộ cho khung chính và các thành phần con */
+#mw-floating-player, 
+#mw-floating-player *, 
+#mw-floating-player *::before, 
+#mw-floating-player *::after {
+    all: initial; /* Xóa bỏ mọi CSS thừa hưởng từ trang web */
+    box-sizing: border-box !important; /* Đảm bảo kích thước tính đúng */
+    font-family: 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* 2. Khung chính */
+#mw-floating-player {
+    position: fixed !important;
+    bottom: 20px;
+    right: 20px;
+    width: 210px !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    
+    background: rgba(0, 0, 0, 0.4) !important; 
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 14px !important;
+    padding: 12px !important;
+    z-index: 2147483647 !important;
+    
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    user-select: none !important;
+}
+
+/* 3. Phần nắp cầm kéo thả */
+#mw-drag-handle {
+    display: block !important;
+    cursor: grab !important;
+    font-size: 11px !important;
+    color: #ffffff !important;
+    opacity: 0.9 !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    width: 100% !important;
+}
+
+/* 4. Khung chứa nút và thanh trượt */
+#mw-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+}
+
+/* 5. Nút Play - Chống méo icon */
+#mw-play-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    border: none !important;
+    border-radius: 50% !important;
+    width: 34px !important;
+    min-width: 34px !important; /* Quan trọng: Giữ nút luôn tròn */
+    max-width: 34px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    
+    color: white !important;
+    font-size: 14px !important;
+    line-height: 1 !important; /* Chống lệch icon bên trong */
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.1s !important;
+}
+
+#mw-play-btn:active {
+    transform: scale(0.9) !important;
+}
+
+/* 6. Thanh trượt âm lượng */
+#mw-volume-slider {
+    all: revert !important; /* Trả lại giao diện thanh trượt cơ bản */
+    flex-grow: 1 !important;
+    cursor: pointer !important;
+    accent-color: #ffffff !important;
+    background: transparent !important;
+    height: 4px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
