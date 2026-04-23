@@ -81,49 +81,53 @@ chrome.storage.onChanged.addListener((changes) => {
     }
 });
 
-// 5. CHỨC NĂNG KÉO THẢ TỰ DO (ĐÃ FIX LỖI TRÔI NHANH)
+// 5. CHỨC NĂNG KÉO THẢ (PHIÊN BẢN CHIẾN ĐẤU - CHỐNG XUNG ĐỘT)
 let isDragging = false;
 let startMouseX = 0, startMouseY = 0;
 let startPlayerX = 0, startPlayerY = 0;
 
-dragHandle.addEventListener("mousedown", (e) => {
+// Dùng pointerdown thay cho mousedown và thêm tham số { capture: true }
+dragHandle.addEventListener("pointerdown", (e) => {
+    // Chỉ xử lý nếu bấm chuột trái (button === 0)
+    if (e.button !== 0) return;
+
     isDragging = true;
     
-    // Ghi nhận vị trí con trỏ chuột lúc bắt đầu bấm
+    // Ghi nhận vị trí
     startMouseX = e.clientX;
     startMouseY = e.clientY;
     
-    // Lấy tọa độ thực tế của khung nhạc ngay lúc đó
     const rect = player.getBoundingClientRect();
     startPlayerX = rect.left;
     startPlayerY = rect.top;
     
-    // Ép khung nhạc chuyển sang dùng left/top tuyệt đối ngay lập tức
     player.style.bottom = 'auto';
     player.style.right = 'auto';
     player.style.left = startPlayerX + 'px';
     player.style.top = startPlayerY + 'px';
-});
-
-document.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    e.preventDefault(); // Ngăn bôi đen chữ trên web khi đang kéo
     
-    // Tính toán khoảng cách chuột đã di chuyển
+    dragHandle.style.cursor = 'grabbing';
+
+    // Ngăn chặn sự kiện bị các bên khác "hớt tay trên"
+    e.stopPropagation(); 
+}, { capture: true }); // <--- Bắt sự kiện ngay từ vòng ngoài (Capture phase)
+
+document.addEventListener("pointermove", (e) => {
+    if (!isDragging) return;
+    
     const dx = e.clientX - startMouseX;
     const dy = e.clientY - startMouseY;
     
-    // Cộng khoảng cách đó vào tọa độ ban đầu của khung
     player.style.left = (startPlayerX + dx) + "px";
     player.style.top = (startPlayerY + dy) + "px";
-});
+}, { capture: true });
 
-document.addEventListener("mouseup", () => {
+document.addEventListener("pointerup", () => {
     if (isDragging) {
         isDragging = false;
+        dragHandle.style.cursor = 'grab';
         
-        // Lưu lại vị trí cuối cùng vào bộ nhớ để mở tab mới nó nằm đúng chỗ
         const rect = player.getBoundingClientRect();
         chrome.storage.local.set({ playerPos: { x: rect.left, y: rect.top } });
     }
-});
+}, { capture: true });

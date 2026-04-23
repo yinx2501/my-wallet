@@ -27,19 +27,40 @@ async function fetchAndSave() {
 
 // --- BACKGROUND: BỘ NÃO ĐIỀU PHỐI (CODE LÕI MỚI) ---
 let isManuallyPaused = false; 
+let offscreenCreating = null; 
 
 chrome.storage.local.get(['isManuallyPaused'], (res) => {
     isManuallyPaused = res.isManuallyPaused || false;
 });
 
+
 async function ensureOffscreen() {
-    const hasOffscreen = await chrome.offscreen.hasDocument();
-    if (!hasOffscreen) {
-        await chrome.offscreen.createDocument({
-            url: 'offscreen.html',
-            reasons: ['AUDIO_PLAYBACK'],
-            justification: 'Music background'
-        });
+    // 1. Nếu đã có sẵn rồi thì thôi
+    if (await chrome.offscreen.hasDocument()) return;
+
+    // 2. Nếu đang trong quá trình tạo, thì chờ cái đang tạo đó xong
+    if (offscreenCreating) {
+        await offscreenCreating;
+        return;
+    }
+
+    // 3. Nếu chưa có và cũng chưa ai tạo, thì bắt đầu tạo
+    offscreenCreating = chrome.offscreen.createDocument({
+        url: 'offscreen.html',
+        reasons: ['AUDIO_PLAYBACK'],
+        justification: 'Music background'
+    });
+
+    try {
+        await offscreenCreating;
+    } catch (e) {
+        // Bỏ qua lỗi nếu thực tế nó đã tồn tại (phòng trường hợp hi hữu)
+        if (!e.message.includes('Only a single offscreen document')) {
+            console.error("Lỗi offscreen thật sự:", e);
+        }
+    } finally {
+        // Xong việc thì giải phóng khóa
+        offscreenCreating = null;
     }
 }
 
