@@ -1,0 +1,51 @@
+[
+  {
+    "id": "$yindreamx.animation.2026-05-16-12:20:41.449",
+    "author": "YinDreamX",
+    "meta": {
+      "pca": {
+        "version": "4.4.2"
+      }
+    },
+    "frames": [
+      {
+        "bmp": "EA4A4587-8EC0-4091-9550-BA1B83EFED45.png"
+      }
+    ],
+    "light": true,
+    "light switching": true,
+    "type": "animation"
+  },
+  {
+    "id": "$yindreamx.decoration.2026-05-16-12:22:34.299",
+    "title": "Lighthouse",
+    "author": "YinDreamX",
+    "ordinal": 99,
+    "meta": {
+      "pca": {
+        "version": "4.4.2"
+      }
+    },
+    "category": "$cat_award00",
+    "frames": [
+      {
+        "bmp": "0E74607B-CA3B-4619-B4BF-4D9DDF73D474.png"
+      }
+    ],
+    "influence park": 40,
+    "influence nature": 10,
+    "animation": [
+      {
+        "id": "$yindreamx.animation.2026-05-16-12:20:41.449",
+        "y": -50
+      }
+    ],
+    "width": 2,
+    "height": 2,
+    "needs road": false,
+    "needs land": false,
+    "needs water": false,
+    "draw ground": true,
+    "type": "decoration"
+  }
+]
