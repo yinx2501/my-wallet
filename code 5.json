@@ -47,5 +47,38 @@
     "needs water": false,
     "draw ground": true,
     "type": "decoration"
+  },
+  {
+    "id": "$yindreamx.decoration.2026-05-16-12:22:42",
+    "title": "Lighthouse",
+    "author": "YinDreamX",
+    "ordinal": 99,
+    "meta": {
+      "pca": {
+        "version": "4.4.2"
+      }
+    },
+    "category": "$cat_award00",
+    "frames": [
+      {
+        "bmp": "2FB4A35A-F0F8-49B9-9DA0-AFB422CF8878.png"
+      }
+    ],
+    "influence park": 40,
+    "influence nature": 10,
+    "animation": [
+      {
+        "id": "$yindreamx.animation.2026-05-16-12:20:41.449",
+        "x": 10
+        "y": -50
+      }
+    ],
+    "width": 2,
+    "height": 2,
+    "needs road": false,
+    "needs land": false,
+    "needs water": false,
+    "draw ground": true,
+    "type": "decoration"
   }
 ]
