@@ -6,13 +6,13 @@ end
 
 -- Hàm hỗ trợ hiển thị đa ngôn ngữ
 local strings = {
-    title = "Radar Settings[vi]Cài đặt Radar[zh]雷达设置[id]Pengaturan Radar",
+    title = "Radar Settings[vi]Cài đặt Radar[zh]雷达设置[in]Pengaturan Radar",
     -- Sử dụng {1} và {2} làm placeholder để thay thế giá trị sau này
-    desc = "Current scan range is {1} tiles.\nDo you want to change it to {2} tiles?[vi]Khoảng cách quét hiện tại là {1} ô.\nBạn có muốn đổi thành {2} ô không?[zh]当前扫描范围为 {1} 格。\n你想把它改成 {2} 格吗？[id]Jangkauan pindai saat ini adalah {1} ubin.\nApakah Anda ingin mengubahnya menjadi {2} ubin?",
-    btn_cancel = "Cancel[vi]Hủy[zh]取消[id]Batal",
-    btn_change = "Change[vi]Thay đổi[zh]更改[id]Ubah",
-    toast_success = "Scan range changed to: {1} tiles[vi]Đã chuyển khoảng cách quét: {1} ô[zh]扫描范围已更改为：{1} 格[id]Jangkauan pindai diubah menjadi: {1} ubin",
-    toast_error = "Unknown error: Cannot load station![vi]Lỗi không xác định: Không thể nạp trạm![zh]未知错误：无法加载雷达站！[id]Kesalahan tidak diketahui: Tidak dapat memuat stasiun!"
+    desc = "Current scan range is {1} tiles.\nDo you want to change it to {2} tiles?[vi]Khoảng cách quét hiện tại là {1} ô.\nBạn có muốn đổi thành {2} ô không?[zh]当前扫描范围为 {1} 格。\n你想把它改成 {2} 格吗？[in]Jangkauan pindai saat ini adalah {1} ubin.\nApakah Anda ingin mengubahnya menjadi {2} ubin?",
+    btn_cancel = "Cancel[vi]Hủy[zh]取消[in]Batal",
+    btn_change = "Change[vi]Thay đổi[zh]更改[in]Ubah",
+    toast_success = "Scan range changed to: {1} tiles[vi]Đã chuyển khoảng cách quét: {1} ô[zh]扫描范围已更改为：{1} 格[in]Jangkauan pindai diubah menjadi: {1} ubin",
+    toast_error = "Unknown error: Cannot load station![vi]Lỗi không xác định: Không thể nạp trạm![zh]未知错误：无法加载雷达站！[in]Kesalahan tidak diketahui: Tidak dapat memuat stasiun!"
 }
 local function yinx_getText(key, val1, val2)
     local text = strings[key] or key
