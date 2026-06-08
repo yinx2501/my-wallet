@@ -115,7 +115,6 @@
             }
         ],
         "script": "1run.lua",
-        "influence park": 100,
         "width": 1,
         "power": 0,
         "water": 0, 
@@ -161,7 +160,6 @@
             }
         ],
         "script": "2run.lua",
-        "influence park": 100,
         "width": 1,
         "power": 0,
         "water": 0,
