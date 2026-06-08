@@ -1,189 +1,171 @@
-[      {
-    "id": "$yinxdisplay",
+[
+      {
+    "id": "$yinxtautrencao",
     "type": "category",
-    "title": "Alert Display",
+    "title": "Elevated Train Board",
     "category": "$cat_decoration00",
     "frames": [
       {
-        "bmp": "thumb.png"
+        "bmp": "screen1.png"
       }
     ],
-    "order": 0
+    "order": 3
   },
     {
-        "id": "yinx.global.settings",
-        "type": "script",
-        "script": "setting.lua"
-    },
-    {
-        "id": "animation.stop",
+        "id": "2ani",
         "type": "animation",
-        "frames": {
-            "bmp": "left2night.png"
-        },
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "animation.go",
-        "type": "animation",
-        "frames": {
-            "bmp": "left1night.png"
-        },
-        "light": "true",
-        "light switching": "true"
-    },
-        {
-        "id": "animation.stop2",
-        "type": "animation",
-        "frames": {
-            "bmp": "right2night.png"
-        },
-        "light": "true",
-        "light switching": "true"
-    },
-        {
-        "id": "animation.go2",
-        "type": "animation",
-        "frames": {
-            "bmp": "right1night.png"
-        },
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "yinx.device1",
-        "type": "decoration",
-        "title": "Vehicle alert display 1 - Left.[vi]Màn hình cảnh báo phương tiện 1 - Trái.[in]Layar peringatan kendaraan 1 - Kiri.[zh]车辆警示显示屏 1 - 左侧。",
-        "text": "Vehicle alert display 1 - Left. Place it on the left side of a regular road (not recommended) or railway. During the initial brief period, the displays might light up simultaneously even without vehicles present. This is not a bug, but the program performing a quick update. Please don't worry.[vi]Màn hình cảnh báo phương tiện 1 - Trái. Đặt nó ở bên trái đường thông thường (không khuyến khích) hoặc đường ray. Trong thời gian rất ngắn ban đầu, các màn hình có thể bật lên cùng lúc dù chưa có phương tiện xuất hiện, đây không phải là lỗi mà chương trình đang cập nhật lại, đừng lo lắng.[in]Layar peringatan kendaraan 1 - Kiri. Tempatkan di sisi kiri jalan raya (tidak disarankan) atau rel kereta api. Pada periode singkat di awal, layar mungkin menyala bersamaan meskipun belum ada kendaraan yang lewat. Ini bukan bug, melainkan program sedang melakukan pembaruan, jadi jangan khawatir.[zh]车辆警示显示屏 1 - 左侧。将其放置在普通道路（不推荐）或铁路的左侧。在安装后的极短时间内，屏幕可能会同时亮起，即使此时并无车辆经过；这不是故障，而是程序正在进行自动校准，请不必担心。",
-        "author": "YinDreamX",
-        "category": "$yinxdisplay",
-        "script": "runleft1.lua",
-        "animation": [
-            {
-            "id": "animation.stop2",
-            "x": 0,
-            "y": -36,
-            "frame": 1
-        },
-         {
-            "id": "animation.go2",
-            "x": 0,
-            "y": -36,
-            "frame": 0
-        }
-    ],
         "frames": [
             {
-                "bmp": "right1.png"
-            },
-            {
-                "bmp": "right2.png"
+                "bmp": "2night.png"
             }
         ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "2redani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "2rednight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "2greenani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "2greennight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "1ani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "1night.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "1redani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "1rednight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "1greenani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "1greennight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "elevatedtrain.1",
+        "type": "building",
+        "category": "$yinxtautrencao",
+        "title": "Direction 1[vi]Hướng 1[in]Arah 1[zh]方向 1",
+        "text": "Direction 1 - Please place it on the left side of the elevated track in a clockwise direction. Refer to the plugin's thumbnail for the correct placement orientation. Tap to adjust the offset distance from the track. There are 4 settings ranging from 1 to 4, cycling back to 1.[vi]Hướng 1 - Vui lòng đặt bên trái của đường ray trên cao theo chiều kim đồng hồ. Xem lại hình đại diện của plugin để rõ cách đặt đúng hướng. Chạm vào để thay đổi khoảng cách đặt ô so với đường ray. Có 4 nấc từ 1 đến 4 và quay về 1.[in]Arah 1 - Harap tempatkan di sisi kiri rel layang dengan arah searah jarum jam. Lihat thumbnail plugin untuk orientasi penempatan yang benar. Ketuk untuk menyesuaikan jarak offset dari rel. Terdapat 4 pengaturan, dari 1 hingga 4, lalu kembali ke 1.[zh]方向1 - 请将它放在高架轨道的左侧，顺时针方向。请参阅插件的缩略图以了解正确的放置方向。点击以调整与轨道的偏移距离。共有4个档位，从1到4循环。",
+        "frames": [
+            {
+                "bmp": "1.png"
+            },
+            {
+                "bmp": "1red.png"
+            },
+            {
+                "bmp": "1green.png"
+            }
+        ],
+        "animation": [
+            {
+                "id": "1ani",
+                "frame": 0,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "1redani",
+                "frame": 1,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "1greenani",
+                "frame": 2,
+                "x": 0,
+                "y": -36
+            }
+        ],
+        "script": "1run.lua",
+        "influence park": 100,
         "width": 1,
+        "power": 0,
+        "water": 0, 
+        "needs lands": "true",
         "height": 1,
         "draw ground": "true"
     },
     {
-        "id": "yinx.device2",
-        "type": "decoration",
-        "title": "Vehicle alert display 1 - Right.[vi]Màn hình cảnh báo phương tiện 1 - Phải.[in]Layar peringatan kendaraan 1 - Kanan.[zh]车辆警示显示屏 1 - 右侧。",
-        "text": "Vehicle alert display 1 - Right. Place it on the right side of a regular road (not recommended) or railway. During the initial brief period, the displays might light up simultaneously even without vehicles present. This is not a bug, but the program performing a quick update. Please don't worry.[vi]Màn hình cảnh báo phương tiện 1 - Phải. Đặt nó ở bên phải đường thông thường (không khuyến khích) hoặc đường ray. Trong thời gian rất ngắn ban đầu, các màn hình có thể bật lên cùng lúc dù chưa có phương tiện xuất hiện, đây không phải là lỗi mà chương trình đang cập nhật lại, đừng lo lắng.[in]Layar peringatan kendaraan 1 - Kanan. Tempatkan di sisi kanan jalan raya atau rel kereta api. Pada periode singkat di awal, layar mungkin menyala bersamaan meskipun belum ada kendaraan yang lewat. Ini bukan bug, melainkan program sedang melakukan pembaruan, jadi jangan khawatir.[zh]车辆警示显示屏 1 - 右侧。将其放置在普通道路或铁路的右侧。在安装后的极短时间内，屏幕可能会同时亮起，即使此时并无车辆经过；这不是故障，而是程序正在进行自动校准，请不必担心。",
-        "author": "YinDreamX",
-        "category": "$yinxdisplay",
-        "script": "runright1.lua",
-        "animation": [
-            {
-            "id": "animation.stop2",
-            "x": 0,
-            "y": -36,
-            "frame": 1
-        },
-         {
-            "id": "animation.go2",
-            "x": 0,
-            "y": -36,
-            "frame": 0
-        }
-    ],
+        "id": "elevatedtrain.2",
+        "type": "building",
+        "category": "$yinxtautrencao",
+        "title": "Direction 2[vi]Hướng 2[in]Arah 2[zh]方向 2",
+        "text": "Direction 2 - Please place it on the right side of the elevated track in a clockwise direction. Refer to the plugin's thumbnail for the correct placement orientation. Tap to adjust the offset distance from the track. There are 4 settings ranging from 1 to 4, cycling back to 1.[vi]Hướng 2 - Vui lòng đặt bên phải của đường ray trên cao theo chiều kim đồng hồ. Xem lại hình đại diện của plugin để rõ cách đặt đúng hướng. Chạm vào để thay đổi khoảng cách đặt ô so với đường ray. Có 4 nấc từ 1 đến 4 và quay về 1.[in]Arah 2 - Harap tempatkan di sisi kanan rel layang dengan arah searah jarum jam. Lihat thumbnail plugin untuk orientasi penempatan yang benar. Ketuk untuk menyesuaikan jarak offset dari rel. Terdapat 4 pengaturan, dari 1 hingga 4, lalu kembali ke 1.[zh]方向2 - 请将它放在高架轨道的右侧，顺时针方向。请参阅插件的缩略图以了解正确的放置方向。点击以调整与轨道的偏移距离。共有4个档位，从1到4循环。",
         "frames": [
             {
-                "bmp": "right1.png"
+                "bmp": "2.png"
             },
             {
-                "bmp": "right2.png"
+                "bmp": "2red.png"
+            },
+            {
+                "bmp": "2green.png"
             }
         ],
-        "width": 1,
-        "height": 1,
-        "draw ground": "true"
-    },
-    {
-        "id": "yinx.device3",
-        "type": "decoration",
-        "title": "Vehicle alert display 2 - Left.[vi]Màn hình cảnh báo phương tiện 2 - Trái.[in]Layar peringatan kendaraan 2 - Kanan.[zh]车辆警示显示屏 2 - 右侧。",
-        "text": "Vehicle alert display 2 - Left. Place it on the left side of a regular road (not recommended) or railway. During the initial brief period, the displays might light up simultaneously even without vehicles present. This is not a bug, but the program performing a quick update. Please don't worry.[vi]Màn hình cảnh báo phương tiện 2 - Trái. Đặt nó ở bên trái đường thông thường (không khuyến khích) hoặc đường ray. Trong thời gian rất ngắn ban đầu, các màn hình có thể bật lên cùng lúc dù chưa có phương tiện xuất hiện, đây không phải là lỗi mà chương trình đang cập nhật lại, đừng lo lắng.[in]Layar peringatan kendaraan 2 - Kiri. Tempatkan di sisi kiri jalan raya atau rel kereta api. Pada periode singkat di awal, layar mungkin menyala bersamaan meskipun belum ada kendaraan yang lewat. Ini bukan bug, melainkan program sedang melakukan pembaruan, jadi jangan khawatir.[zh]车辆警示显示屏 2 - 左侧。将其放置在普通道路或铁路的左侧。在安装后的极短时间内，屏幕可能会同时亮起，即使此时并无车辆经过；这不是故障，而是程序正在进行自动校准，请不必担心。",
-        "author": "YinDreamX",
-        "category": "$yinxdisplay",
-        "script": "runleft2.lua",
         "animation": [
             {
-            "id": "animation.stop",
-            "x": 0,
-            "y": -36,
-            "frame": 1
-        },
-         {
-            "id": "animation.go",
-            "x": 0,
-            "y": -36,
-            "frame": 0
-        }
-    ],
-        "frames": [
-            {
-                "bmp": "left1.png"
+                "id": "2ani",
+                "frame": 0,
+                "x": 0,
+                "y": -36
             },
             {
-                "bmp": "left2.png"
-            }
-        ],
-        "width": 1,
-        "height": 1,
-        "draw ground": "true"
-    },
-    {
-        "id": "yinx.device4",
-        "type": "decoration",
-        "title": "Vehicle alert display 2 - Right.[vi]Màn hình cảnh báo phương tiện 2 - Phải.[in]Layar peringatan kendaraan - Kanan.[zh]车辆警示显示屏 2 - 右侧。",
-        "text": "Vehicle alert display 2 - Right. Place it on the right side of a regular road (not recommended) or railway. During the initial brief period, the displays might light up simultaneously even without vehicles present. This is not a bug, but the program performing a quick update. Please don't worry.[vi]Màn hình cảnh báo phương tiện 2 - Phải. Đặt nó ở bên phải đường thông thường (không khuyến khích) hoặc đường ray. Trong thời gian rất ngắn ban đầu, các màn hình có thể bật lên cùng lúc dù chưa có phương tiện xuất hiện, đây không phải là lỗi mà chương trình đang cập nhật lại, đừng lo lắng.[in]Layar peringatan kendaraan 2 - Kanan. Tempatkan di sisi kanan jalan raya atau rel kereta api. Pada periode singkat di awal, layar mungkin menyala bersamaan meskipun belum ada kendaraan yang lewat. Ini bukan bug, melainkan program sedang melakukan pembaruan, jadi jangan khawatir.[zh]车辆警示显示屏 2 - 右侧。将其放置在普通道路或铁路的右侧。在安装后的极短时间内，屏幕可能会同时亮起，即使此时并无车辆经过；这不是故障，而是程序正在进行自动校准，请不必担心。",
-        "author": "YinDreamX",
-        "category": "$yinxdisplay",
-        "script": "runright2.lua",
-        "animation": [
-            {
-            "id": "animation.stop",
-            "x": 0,
-            "y": -36,
-            "frame": 1
-        },
-         {
-            "id": "animation.go",
-            "x": 0,
-            "y": -36,
-            "frame": 0
-        }
-    ],
-        "frames": [
-            {
-                "bmp": "left1.png"
+                "id": "2redani",
+                "frame": 1,
+                "x": 0,
+                "y": -37
             },
             {
-                "bmp": "left2.png"
+                "id": "2greenani",
+                "frame": 2,
+                "x": 0,
+                "y": -36
             }
         ],
+        "script": "2run.lua",
+        "influence park": 100,
         "width": 1,
+        "power": 0,
+        "water": 0,
+        "needs lands": "true",
         "height": 1,
         "draw ground": "true"
     }
