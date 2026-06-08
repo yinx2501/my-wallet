@@ -1,170 +1,192 @@
 [
-      {
-    "id": "$yinxtautrencao",
+  {
+    "id": "$yinx_category",
     "type": "category",
-    "title": "Elevated Train Board",
-    "category": "$cat_decoration00",
+    "title": "VietNam Commercial Pack by NamVu & YinX",
+    "text": "GHTK SOC and BigC by NamVu & YinX.",
+    "category": "$cat_zone00",
     "frames": [
       {
-        "bmp": "screen1.png"
+        "bmp": "icon.png"
       }
     ],
     "order": 3
   },
-    {
-        "id": "2ani",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "2night.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "2redani",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "2rednight.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "2greenani",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "2greennight.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "1ani",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "1night.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "1redani",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "1rednight.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "1greenani",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "1greennight.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "elevatedtrain.1",
-        "type": "building",
-        "category": "$yinxtautrencao",
-        "title": "Direction 1[vi]Hướng 1[in]Arah 1[zh]方向 1",
-        "text": "Direction 1 - Please place it on the left side of the elevated track in a clockwise direction. Refer to the plugin's thumbnail for the correct placement orientation. Tap to adjust the offset distance from the track. There are 4 settings ranging from 1 to 4, cycling back to 1.[vi]Hướng 1 - Vui lòng đặt bên trái của đường ray trên cao theo chiều kim đồng hồ. Xem lại hình đại diện của plugin để rõ cách đặt đúng hướng. Chạm vào để thay đổi khoảng cách đặt ô so với đường ray. Có 4 nấc từ 1 đến 4 và quay về 1.[in]Arah 1 - Harap tempatkan di sisi kiri rel layang dengan arah searah jarum jam. Lihat thumbnail plugin untuk orientasi penempatan yang benar. Ketuk untuk menyesuaikan jarak offset dari rel. Terdapat 4 pengaturan, dari 1 hingga 4, lalu kembali ke 1.[zh]方向1 - 请将它放在高架轨道的左侧，顺时针方向。请参阅插件的缩略图以了解正确的放置方向。点击以调整与轨道的偏移距离。共有4个档位，从1到4循环。",
-        "frames": [
-            {
-                "bmp": "1.png"
-            },
-            {
-                "bmp": "1red.png"
-            },
-            {
-                "bmp": "1green.png"
-            }
-        ],
-        "animation": [
-            {
-                "id": "1ani",
-                "frame": 0,
-                "x": 0,
-                "y": -36
-            },
-            {
-                "id": "1redani",
-                "frame": 1,
-                "x": 0,
-                "y": -36
-            },
-            {
-                "id": "1greenani",
-                "frame": 2,
-                "x": 0,
-                "y": -36
-            }
-        ],
-        "script": "1run.lua",
-        "width": 1,
-        "power": 0,
-        "water": 0, 
-        "needs lands": "true",
-        "height": 1,
-        "draw ground": "true"
-    },
-    {
-        "id": "elevatedtrain.2",
-        "type": "building",
-        "category": "$yinxtautrencao",
-        "title": "Direction 2[vi]Hướng 2[in]Arah 2[zh]方向 2",
-        "text": "Direction 2 - Please place it on the right side of the elevated track in a clockwise direction. Refer to the plugin's thumbnail for the correct placement orientation. Tap to adjust the offset distance from the track. There are 4 settings ranging from 1 to 4, cycling back to 1.[vi]Hướng 2 - Vui lòng đặt bên phải của đường ray trên cao theo chiều kim đồng hồ. Xem lại hình đại diện của plugin để rõ cách đặt đúng hướng. Chạm vào để thay đổi khoảng cách đặt ô so với đường ray. Có 4 nấc từ 1 đến 4 và quay về 1.[in]Arah 2 - Harap tempatkan di sisi kanan rel layang dengan arah searah jarum jam. Lihat thumbnail plugin untuk orientasi penempatan yang benar. Ketuk untuk menyesuaikan jarak offset dari rel. Terdapat 4 pengaturan, dari 1 hingga 4, lalu kembali ke 1.[zh]方向2 - 请将它放在高架轨道的右侧，顺时针方向。请参阅插件的缩略图以了解正确的放置方向。点击以调整与轨道的偏移距离。共有4个档位，从1到4循环。",
-        "frames": [
-            {
-                "bmp": "2.png"
-            },
-            {
-                "bmp": "2red.png"
-            },
-            {
-                "bmp": "2green.png"
-            }
-        ],
-        "animation": [
-            {
-                "id": "2ani",
-                "frame": 0,
-                "x": 0,
-                "y": -36
-            },
-            {
-                "id": "2redani",
-                "frame": 1,
-                "x": 0,
-                "y": -37
-            },
-            {
-                "id": "2greenani",
-                "frame": 2,
-                "x": 0,
-                "y": -36
-            }
-        ],
-        "script": "2run.lua",
-        "width": 1,
-        "power": 0,
-        "water": 0,
-        "needs lands": "true",
-        "height": 1,
-        "draw ground": "true"
-    }
+  {
+    "id": "$boardnight",
+    "type": "animation",
+    "light": true,
+    "light switching": true,
+    "frames": [
+      {
+        "bmp": "night.png"
+      }
+    ]
+  },
+  {
+    "id": "$content",
+    "type": "animation",
+    "light": true,
+    "speed": 0.1,
+    "frames": [
+      {
+        "bmp": "bigcb.png"
+      },
+      {
+        "bmp": "lotte.png"
+      },
+      {
+        "bmp": "shopee.png"
+      }
+    ]
+  },
+  {
+    "text": "Supermarket Billboard",
+    "title": "Supermarket Billboard",
+    "author": "YinDreamX",
+    "category": "$yinx_category",
+    "frames": [
+      {
+        "bmp": "background.png"
+      }
+    ],
+    "height": 1,
+    "width": 1,
+    "id": "$billboardmarket",
+    "animation": [
+      {
+        "id": "$boardnight",
+        "x": 0,
+        "y": -54
+      },
+      {
+        "id": "$content",
+        "x": 0,
+        "y": -54
+      }
+    ],
+    "rotation aware": false,
+    "draw ground": "true",
+    "type": "decoration"
+  },
+  {
+    "id": "$gbigcnight",
+    "type": "animation",
+    "frames": [
+      {
+        "bmp": "bigcnight.png"
+      }
+    ],
+    "light": "true",
+    "light switching": "true"
+  },
+  {
+    "id": "$ghtknight",
+    "type": "animation",
+    "frames": [
+      {
+        "bmp": "ghtksocnight.png"
+      }
+    ],
+    "light": "true",
+    "light switching": "true"
+  },
+  {
+    "id": "$ghtknight2",
+    "type": "animation",
+    "frames": [
+      {
+        "bmp": "ghtksoc2night.png"
+      }
+    ],
+    "light": "true",
+    "light switching": "true"
+  },
+  {
+    "id": "$ghtksoc00",
+    "type": "commercial",
+    "level": 3,
+    "author": "Nam Vu & YinDreamX",
+    "width": 8,
+    "height": 8,
+    "frames": [
+      {
+        "bmp": "ghtksoc.png"
+      }
+    ],
+    "animation": [
+      {
+        "id": "$ghtknight",
+        "x": 0,
+        "y": -84
+      }
+    ],
+    "title": "GHTK SOC",
+    "category": "$yinx_category",
+    "draw ground": true
+  },
+  {
+    "id": "$ghtksoc01",
+    "type": "commercial",
+    "level": 3,
+    "author": "Nam Vu & YinDreamX",
+    "width": 8,
+    "height": 8,
+    "frames": [
+      {
+        "bmp": "ghtksoc2.png"
+      }
+    ],
+    "title": "GHTK SOC 2",
+    "category": "$yinx_category",
+    "draw ground": true,
+    "animation": [
+      {
+        "id": "$ghtknight2",
+        "x": 0,
+        "y": -84
+      }
+    ]
+  },
+  {
+    "id": "hall.bigc",
+    "title": "BigC Thang Long",
+    "category": "$yinx_category",
+    "type": "commercial",
+    "level": 3,
+    "author": "NamVu & YinDreamX",
+    "width": 8,
+    "height": 8,
+    "frames": [
+      {
+        "bmp": "bigc.png"
+      }
+    ],
+    "animation": [
+      {
+        "id": "$gbigcnight",
+        "x": 0,
+        "y": -108
+      }
+    ],
+    "needs road": false,
+    "auto build": false,
+    "draw ground": true
+  },
+  {
+    "id": "lanxe.bigc",
+    "title": "Parking shed[vi]Lán để xe",
+    "category": "$yinx_category",
+    "type": "decoration",
+    "width": 1,
+    "height": 1,
+    "frames": [
+      {
+        "bmp": "lanxe1.png"
+      },
+      {
+        "bmp": "lanxe2.png"
+      }
+    ]
+  }
 ]
