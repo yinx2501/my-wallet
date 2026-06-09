@@ -1,194 +1,268 @@
 [
-  {
-    "id": "$yinx_category",
-    "type": "category",
-    "title": "VietNam Commercial Pack by NamVu & YinX",
-    "text": "GHTK SOC and BigC by NamVu & YinX.",
-    "category": "$cat_zone00",
-    "frames": [
-      {
-        "bmp": "icon.png"
-      }
-    ],
-    "order": 3
-  },
-  {
-    "id": "$boardnight",
-    "type": "animation",
-    "light": true,
-    "light switching": true,
-    "frames": [
-      {
-        "bmp": "night.png"
-      }
-    ]
-  },
-  {
-    "id": "$content",
-    "type": "animation",
-    "light": true,
-    "speed": 0.1,
-    "frames": [
-      {
-        "bmp": "bigcb.png"
-      },
-      {
-        "bmp": "lotte.png"
-      },
-      {
-        "bmp": "shopee.png"
-      }
-    ]
-  },
-  {
-    "text": "Supermarket Billboard",
-    "title": "Supermarket Billboard",
-    "author": "YinDreamX",
-    "category": "$yinx_category",
-    "frames": [
-      {
-        "bmp": "background.png"
-      }
-    ],
-    "height": 1,
-    "width": 1,
-    "id": "$billboardmarket",
-    "animation": [
-      {
-        "id": "$boardnight",
-        "x": 0,
-        "y": -54
-      },
-      {
-        "id": "$content",
-        "x": 0,
-        "y": -54
-      }
-    ],
-    "rotation aware": false,
-    "draw ground": "true",
-    "type": "decoration"
-  },
-  {
-    "id": "$gbigcnight",
-    "type": "animation",
-    "frames": [
-      {
-        "bmp": "bigcnight.png"
-      }
-    ],
-    "light": "true",
-    "light switching": "true"
-  },
-  {
-    "id": "$ghtknight",
-    "type": "animation",
-    "frames": [
-      {
-        "bmp": "ghtksocnight.png"
-      }
-    ],
-    "light": "true",
-    "light switching": "true"
-  },
-  {
-    "id": "$ghtknight2",
-    "type": "animation",
-    "frames": [
-      {
-        "bmp": "ghtksoc2night.png"
-      }
-    ],
-    "light": "true",
-    "light switching": "true"
-  },
-  {
-    "id": "$ghtksoc00",
-    "type": "commercial",
-    "level": 3,
-    "author": "Nam Vu & YinDreamX",
-    "width": 8,
-    "height": 8,
-    "frames": [
-      {
-        "bmp": "ghtksoc.png"
-      }
-    ],
-    "animation": [
-      {
-        "id": "$ghtknight",
-        "x": 0,
-        "y": -84
-      }
-    ],
-    "title": "GHTK SOC",
-    "category": "$yinx_category",
-    "draw ground": true
-  },
-  {
-    "id": "$ghtksoc01",
-    "type": "commercial",
-    "level": 3,
-    "author": "Nam Vu & YinDreamX",
-    "width": 8,
-    "height": 8,
-    "frames": [
-      {
-        "bmp": "ghtksoc2.png"
-      }
-    ],
-    "title": "GHTK SOC 2",
-    "category": "$yinx_category",
-    "draw ground": true,
-    "animation": [
-      {
-        "id": "$ghtknight2",
-        "x": 0,
-        "y": -84
-      }
-    ]
-  },
-  {
-    "id": "hall.bigc",
-    "title": "BigC Thang Long",
-    "category": "$yinx_category",
-    "type": "commercial",
-    "level": 3,
-    "author": "NamVu & YinDreamX",
-    "width": 8,
-    "height": 8,
-    "frames": [
-      {
-        "bmp": "bigc.png"
-      }
-    ],
-    "animation": [
-      {
-        "id": "$gbigcnight",
-        "x": 0,
-        "y": -108
-      }
-    ],
-    "needs road": false,
-    "auto build": false,
-    "draw ground": true
-  },
-  {
-    "id": "lanxe.bigc",
-    "title": "Parking shed[vi]Lán để xe",
-    "category": "$yinx_category",
-    "type": "decoration",
-    "width": 1,
-    "text": "Parking shed - Just to decor[vi]Lán để xe - Chỉ để trang trí",
-    "draw ground": "true",
-    "height": 1,
-    "frames": [
-      {
-        "bmp": "lanxe1.png"
-      },
-      {
-        "bmp": "lanxe2.png"
-      }
-    ]
-  }
+    {
+        "id": "$yinx.time.category",
+        "type": "category",
+        "title": "Time Billboard.",
+        "text": "Time Billboard by YinDreamX & Ayukucing.",
+        "category": "$cat_public00",
+        "frames": [
+            {
+                "bmp": "clock.png"
+            }
+        ],
+        "order": 3
+    },
+    {
+        "id": "script.controltime.yinx",
+        "type": "script",
+        "script": "gio.lua"
+    },
+    {
+        "id": "night.animation.bill",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "night.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "night.animation.bill2",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "night2.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "hiden": "true",
+        "frames": [
+            {
+                "bmp": "0.png"
+            },
+            {
+                "bmp": "1.png"
+            },
+            {
+                "bmp": "2.png"
+            },
+            {
+                "bmp": "3.png"
+            },
+            {
+                "bmp": "4.png"
+            },
+            {
+                "bmp": "5.png"
+            },
+            {
+                "bmp": "6.png"
+            },
+            {
+                "bmp": "7.png"
+            },
+            {
+                "bmp": "8.png"
+            },
+            {
+                "bmp": "9.png"
+            },
+            {
+                "bmp": "10.png"
+            },
+            {
+                "bmp": "11.png"
+            },
+            {
+                "bmp": "12.png"
+            },
+            {
+                "bmp": "1p.png"
+            },
+            {
+                "bmp": "2p.png"
+            },
+            {
+                "bmp": "3p.png"
+            },
+            {
+                "bmp": "4p.png"
+            },
+            {
+                "bmp": "5p.png"
+            },
+            {
+                "bmp": "6p.png"
+            },
+            {
+                "bmp": "7p.png"
+            },
+            {
+                "bmp": "8p.png"
+            },
+            {
+                "bmp": "9p.png"
+            },
+            {
+                "bmp": "10p.png"
+            },
+            {
+                "bmp": "11p.png"
+            },
+            {
+                "bmp": "sang.png"
+            },
+            {
+                "bmp": "trua.png"
+            },
+            {
+                "bmp": "chieu.png"
+            },
+            {
+                "bmp": "toi.png"
+            }
+        ],
+        "height": 1,
+        "width": 1,
+        "id": "$timeboard",
+        "animation": [
+            {
+                "id": "night.animation.bill",
+                "x": 0,
+                "y": -50
+            }
+        ],
+        "author": "YinDreamX & Ayukucing",
+        "price": 1000,
+        "rotation aware": false,
+        "text": "Time Billboard - Please enable Day/Night mode to experience it. MAKE SURE YOU SELECT FRAME 1/28; IF YOU SELECT ANY OTHER FRAME, THE BILLBOARD WILL NOT WORK.[vi]Time Billboard - Hãy bật chế độ ngày/đêm để trải nghiệm. ĐẢM BẢO RẰNG BẠN ĐANG CHỌN FRAME 1/28, NẾU CHỌN FRAME KHÁC BILLBOARD SẼ KHÔNG CHẠY.[in]Time Billboard - Harap aktifkan mode Siang/Malam untuk mengalaminya. PASTIKAN ANDA MEMILIH FRAME 1/28; JIKA MEMILIH FRAME LAIN, BILLBOARD TIDAK AKAN BEKERJA.",
+        "title": "Time Billboard",
+        "draw ground": "true",
+        "type": "decoration",
+        "category": "$yinx.time.category",
+        "influence park": 20
+    },
+    {
+        "id": "$yinx.text",
+        "type": "topic",
+        "text": "Sending love and greetings from Vietnam.",
+        "weight": 5,
+        "color": {
+            "r": 255,
+            "g": 0,
+            "b": 0
+        }
+    },
+    {
+        "frames": [
+            {
+                "bmp": "12pm.png"
+            },
+            {
+                "bmp": "1am.png"
+            },
+            {
+                "bmp": "2am.png"
+            },
+            {
+                "bmp": "3am.png"
+            },
+            {
+                "bmp": "4am.png"
+            },
+            {
+                "bmp": "5am.png"
+            },
+            {
+                "bmp": "6am.png"
+            },
+            {
+                "bmp": "7am.png"
+            },
+            {
+                "bmp": "8am.png"
+            },
+            {
+                "bmp": "9am.png"
+            },
+            {
+                "bmp": "10am.png"
+            },
+            {
+                "bmp": "11am.png"
+            },
+            {
+                "bmp": "12am.png"
+            },
+            {
+                "bmp": "1pm.png"
+            },
+            {
+                "bmp": "2pm.png"
+            },
+            {
+                "bmp": "3pm.png"
+            },
+            {
+                "bmp": "4pm.png"
+            },
+            {
+                "bmp": "5pm.png"
+            },
+            {
+                "bmp": "6pm.png"
+            },
+            {
+                "bmp": "7pm.png"
+            },
+            {
+                "bmp": "8pm.png"
+            },
+            {
+                "bmp": "9pm.png"
+            },
+            {
+                "bmp": "10pm.png"
+            },
+            {
+                "bmp": "11pm.png"
+            },
+            {
+                "bmp": "sang2.png"
+            },
+            {
+                "bmp": "trua2.png"
+            },
+            {
+                "bmp": "chieu2.png"
+            },
+            {
+                "bmp": "toi2.png"
+            }
+        ],
+        "height": 1,
+        "width": 1,
+        "id": "$timeboard2",
+        "author": "YinDreamX & Ayukucing",
+        "price": 1000,
+        "rotation aware": false,
+        "text": "Time Billboard 2 - Please enable Day/Night mode to experience it. MAKE SURE YOU SELECT FRAME 1/28; IF YOU SELECT ANY OTHER FRAME, THE BILLBOARD WILL NOT WORK[vi] Time Billboard 2 - Hãy bật chế độ ngày/đêm để trải nghiệm. ĐẢM BẢO RẰNG BẠN ĐANG CHỌN FRAME 1/28, NẾU CHỌN FRAME KHÁC BILLBOARD SẼ KHÔNG CHẠY.[in]Time Billboard 2 - Harap aktifkan mode Siang/Malam untuk mengalaminya. PASTIKAN ANDA MEMILIH FRAME 1/28; JIKA MEMILIH FRAME LAIN, BILLBOARD TIDAK AKAN BEKERJA..",
+        "title": "Time Billboard - 2",
+        "draw ground": "true",
+        "type": "decoration",
+        "category": "$yinx.time.category",
+        "influence park": 20,
+        "animation": [
+            {
+                "id": "night.animation.bill2",
+                "x": 0,
+                "y": -56
+            }
+        ]
+    }
 ]
