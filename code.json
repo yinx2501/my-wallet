@@ -1,270 +1,45 @@
 [
-    {
-        "id": "$yinx.time.category",
-        "type": "category",
-        "title": "Time Billboard.",
-        "text": "Time Billboard by YinDreamX & Ayukucing.",
-        "category": "$cat_public00",
-        "frames": [
-            {
-                "bmp": "clock.png"
-            }
-        ],
-        "order": 3
+  {
+    "id": "$...........landmark.2025-07-14-18:2:21.331",
+    "title": "Bridge",
+    "author": "..........",
+    "meta": {
+      "pca": {
+        "version": "4.4.1"
+      }
     },
-    {
-        "id": "script.controltime.yinx",
-        "type": "script",
-        "script": "gio.lua"
-    },
-    {
-        "id": "night.animation.bill",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "night.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "id": "night.animation.bill2",
-        "type": "animation",
-        "frames": [
-            {
-                "bmp": "night2.png"
-            }
-        ],
-        "light": "true",
-        "light switching": "true"
-    },
-    {
-        "hiden": "true",
-        "frames": [
-            {
-                "bmp": "0.png"
-            },
-            {
-                "bmp": "1.png"
-            },
-            {
-                "bmp": "2.png"
-            },
-            {
-                "bmp": "3.png"
-            },
-            {
-                "bmp": "4.png"
-            },
-            {
-                "bmp": "5.png"
-            },
-            {
-                "bmp": "6.png"
-            },
-            {
-                "bmp": "7.png"
-            },
-            {
-                "bmp": "8.png"
-            },
-            {
-                "bmp": "9.png"
-            },
-            {
-                "bmp": "10.png"
-            },
-            {
-                "bmp": "11.png"
-            },
-            {
-                "bmp": "12.png"
-            },
-            {
-                "bmp": "1p.png"
-            },
-            {
-                "bmp": "2p.png"
-            },
-            {
-                "bmp": "3p.png"
-            },
-            {
-                "bmp": "4p.png"
-            },
-            {
-                "bmp": "5p.png"
-            },
-            {
-                "bmp": "6p.png"
-            },
-            {
-                "bmp": "7p.png"
-            },
-            {
-                "bmp": "8p.png"
-            },
-            {
-                "bmp": "9p.png"
-            },
-            {
-                "bmp": "10p.png"
-            },
-            {
-                "bmp": "11p.png"
-            },
-            {
-                "bmp": "sang.png"
-            },
-            {
-                "bmp": "trua.png"
-            },
-            {
-                "bmp": "chieu.png"
-            },
-            {
-                "bmp": "toi.png"
-            }
-        ],
-        "height": 1,
-        "width": 1,
-        "id": "$timeboard",
-        "animation": [
-            {
-                "id": "night.animation.bill",
-                "x": 0,
-                "y": -50
-            }
-        ],
-        "author": "YinDreamX & Ayukucing",
-        "price": 1000,
-        "rotation aware": "false",
-        "selectable frames": "false",
-        "text": "Time Billboard - Please enable Day/Night mode to experience it.[vi]Time Billboard - Hãy bật chế độ ngày/đêm để trải nghiệm. [in]Time Billboard - Harap aktifkan mode Siang/Malam untuk mengalaminya.",
-        "title": "Time Billboard",
-        "draw ground": "true",
-        "type": "decoration",
-        "category": "$yinx.time.category",
-        "influence park": 20
-    },
-    {
-        "id": "$yinx.text",
-        "type": "topic",
-        "text": "Sending love and greetings from Vietnam.",
-        "weight": 5,
-        "color": {
-            "r": 255,
-            "g": 0,
-            "b": 0
-        }
-    },
-    {
-        "frames": [
-            {
-                "bmp": "12pm.png"
-            },
-            {
-                "bmp": "1am.png"
-            },
-            {
-                "bmp": "2am.png"
-            },
-            {
-                "bmp": "3am.png"
-            },
-            {
-                "bmp": "4am.png"
-            },
-            {
-                "bmp": "5am.png"
-            },
-            {
-                "bmp": "6am.png"
-            },
-            {
-                "bmp": "7am.png"
-            },
-            {
-                "bmp": "8am.png"
-            },
-            {
-                "bmp": "9am.png"
-            },
-            {
-                "bmp": "10am.png"
-            },
-            {
-                "bmp": "11am.png"
-            },
-            {
-                "bmp": "12am.png"
-            },
-            {
-                "bmp": "1pm.png"
-            },
-            {
-                "bmp": "2pm.png"
-            },
-            {
-                "bmp": "3pm.png"
-            },
-            {
-                "bmp": "4pm.png"
-            },
-            {
-                "bmp": "5pm.png"
-            },
-            {
-                "bmp": "6pm.png"
-            },
-            {
-                "bmp": "7pm.png"
-            },
-            {
-                "bmp": "8pm.png"
-            },
-            {
-                "bmp": "9pm.png"
-            },
-            {
-                "bmp": "10pm.png"
-            },
-            {
-                "bmp": "11pm.png"
-            },
-            {
-                "bmp": "sang2.png"
-            },
-            {
-                "bmp": "trua2.png"
-            },
-            {
-                "bmp": "chieu2.png"
-            },
-            {
-                "bmp": "toi2.png"
-            }
-        ],
-        "height": 1,
-        "width": 1,
-        "id": "$timeboard2",
-        "author": "YinDreamX & Ayukucing",
-        "price": 1000,
-        "rotation aware": "false",
-        "selectable frames": "false",
-        "text": "Time Billboard 2 - Please enable Day/Night mode to experience it.[vi] Time Billboard 2 - Hãy bật chế độ ngày/đêm để trải nghiệm. [in]Time Billboard 2 - Harap aktifkan mode Siang/Malam untuk mengalaminya.",
-        "title": "Time Billboard - 2",
-        "draw ground": "true",
-        "type": "decoration",
-        "category": "$yinx.time.category",
-        "influence park": 20,
-        "animation": [
-            {
-                "id": "night.animation.bill2",
-                "x": 0,
-                "y": -56
-            }
-        ]
-    }
+    "frames": [
+      {
+        "bmp": "1.png"
+      },
+      {
+        "bmp": "2.png"
+      },
+      {
+        "bmp": "3.png"
+      },
+      {
+        "bmp": "4.png"
+      },
+      {
+        "bmp": "5.png"
+      },
+      {
+        "bmp": "6.png"
+      },
+      {
+        "bmp": "7.png"
+      },
+      {
+        "bmp": "8.png"
+      }
+    ],
+    "build time": 0,
+    "width": 4,
+    "height": 4,
+    "needs land": false,
+    "needs water": true,
+    "draw ground": true,
+    "type": "landmark"
+  }
 ]
