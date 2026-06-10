@@ -2,6 +2,9 @@
   {
     "id": "Static Clouds 1",
     "author": "Nature Argentina",
+    "title": "Haze",
+    "text": "Fixed by YinDreamX",
+    "category": "$cat_decoration00",
     "meta": {
       "pca": {
         "version": "4.4.1"
@@ -9,31 +12,31 @@
     },
     "frames": [
       {
-        "bmp": "83 sin título_20250516232537.png"
+        "bmp": "1.png"
       },
       {
-        "bmp": "83 sin título_20250516232541.png"
+        "bmp": "2.png"
       },
       {
-        "bmp": "83 sin título_20250516232547.png"
+        "bmp": "3.png"
       },
       {
-        "bmp": "83 sin título_20250516232552.png"
+        "bmp": "4.png"
       },
       {
-        "bmp": "83 sin título_20250516232556.png"
+        "bmp": "5.png"
       },
       {
-        "bmp": "83 sin título_20250516232601.png"
+        "bmp": "6.png"
       },
       {
-        "bmp": "83 sin título_20250516232605.png"
+        "bmp": "7.png"
       },
       {
-        "bmp": "83 sin título_20250516232610.png"
+        "bmp": "8.png"
       },
       {
-        "bmp": "83 sin título_20250516232614.png"
+        "bmp": "9.png"
       }
     ],
     "type": "tree"
