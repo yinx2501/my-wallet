@@ -1,44 +1,462 @@
 [
-  {
-    "id": "Static Clouds 1",
-    "author": "Nature Argentina",
-    "title": "Haze",
-    "text": "Fixed by YinDreamX",
-    "category": "$cat_decoration00",
-    "meta": {
-      "pca": {
-        "version": "4.4.1"
-      }
+    {
+        "id": "$yinx_category_alert2",
+        "type": "category",
+        "title": "Alert Board by YinDreamX",
+        "text": "8 parts of Alert Board by YinDreamX.",
+        "category": "$cat_decoration00",
+        "frames": [
+            {
+                "bmp": "left1.png"
+            }
+        ],
+        "order": 1
     },
-    "frames": [
-      {
-        "bmp": "1.png"
-      },
-      {
-        "bmp": "2.png"
-      },
-      {
-        "bmp": "3.png"
-      },
-      {
-        "bmp": "4.png"
-      },
-      {
-        "bmp": "5.png"
-      },
-      {
-        "bmp": "6.png"
-      },
-      {
-        "bmp": "7.png"
-      },
-      {
-        "bmp": "8.png"
-      },
-      {
-        "bmp": "9.png"
-      }
-    ],
-    "type": "tree"
-  }
+    {
+        "id": "$yinx_category_alertmau1",
+        "type": "category",
+        "title": "Ground",
+        "text": "4 parts of Alert Board by YinDreamX.",
+        "category": "$yinx_category_alert2",
+        "frames": [
+            {
+                "bmp": "left1.png"
+            }
+        ],
+        "order": 1
+    },
+    {
+        "id": "$yinx_category_alertmau2",
+        "type": "category",
+        "title": "Elevated",
+        "text": "4 parts of Alert Board by YinDreamX.",
+        "category": "$yinx_category_alert2",
+        "frames": [
+            {
+                "bmp": "base.png"
+            }
+        ],
+        "order": 1
+    },
+    {
+        "id": "2aniyinx",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "2night.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "2redani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "2rednight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "2greenani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "2greennight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "1aniyinx",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "1night.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "1redani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "1rednight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "1greenani",
+        "type": "animation",
+        "frames": [
+            {
+                "bmp": "1greennight.png"
+            }
+        ],
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "animation.stopyinx",
+        "type": "animation",
+        "frames": {
+            "bmp": "left2night.png"
+        },
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "animation.goyinx",
+        "type": "animation",
+        "frames": {
+            "bmp": "left1night.png"
+        },
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "animation.stopyinx2",
+        "type": "animation",
+        "frames": {
+            "bmp": "right2night.png"
+        },
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "animation.goyinx2",
+        "type": "animation",
+        "frames": {
+            "bmp": "right1night.png"
+        },
+        "light": "true",
+        "light switching": "true"
+    },
+    {
+        "id": "yinx.alert1",
+        "type": "decoration",
+        "author": "YinDreamX",
+        "title": "Alert Board 1[vi]Bảng thông báo 1[in]Papan Pengumuman 1[zh]通知面板 1",
+        "text": "Alert Board for ground vehicles (ONLY RUNS ON ALTITUDE = 0). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho phương tiện chạy trên mặt đất (CHỈ CHẠY VỚI NỀN CÓ ĐỘ CAO = 0). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI! [in]Dasbor untuk kendaraan darat (HANYA BERJALAN PADA KETINGGIAN = 0). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]地面车辆仪表板 (仅在海拔 = 0 时运行). 请关闭此面板并选择需要监控的轨道地块！",
+        "width": 1,
+        "category": "$yinx_category_alertmau1",
+        "height": 1,
+        "draw ground": "true",
+        "animation": [
+            {
+                "id": "1aniyinx",
+                "frame": 0,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "1redani",
+                "frame": 1,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "1greenani",
+                "frame": 2,
+                "x": 0,
+                "y": -36
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "base.png"
+            },
+            {
+                "bmp": "come.png"
+            },
+            {
+                "bmp": "out.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "yinx.alert2",
+        "type": "decoration",
+        "category": "$yinx_category_alertmau1",
+        "author": "YinDreamX",
+        "title": "Alert Board 1[vi]Bảng thông báo 1[in]Papan Pengumuman 1[zh]通知面板 1",
+        "text": "Alert Board for ground vehicles (ONLY RUNS ON ALTITUDE = 0). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho phương tiện chạy trên mặt đất (CHỈ CHẠY VỚI NỀN CÓ ĐỘ CAO = 0). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI![in]Dasbor untuk kendaraan darat (HANYA BERJALAN PADA KETINGGIAN = 0). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]地面车辆仪表板 (仅在海拔 = 0 时运行). 请关闭此面板并选择需要监控的轨道地块！",
+        "width": 1,
+        "height": 1,
+        "draw ground": "true",
+        "animation": [
+            {
+                "id": "2aniyinx",
+                "frame": 0,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "2redani",
+                "frame": 1,
+                "x": 0,
+                "y": -37
+            },
+            {
+                "id": "2greenani",
+                "frame": 2,
+                "x": 0,
+                "y": -36
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "base2.png"
+            },
+            {
+                "bmp": "come2.png"
+            },
+            {
+                "bmp": "out2.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "yinx.alert3",
+        "category": "$yinx_category_alertmau1",
+        "type": "decoration",
+        "title": "Alert Board 2[vi]Bảng thông báo 2[in]Papan Pengumuman 2[zh]通知面板 2",
+        "text": "Alert Board for ground vehicles (ONLY RUNS ON ALTITUDE = 0). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho phương tiện chạy trên mặt đất (CHỈ CHẠY VỚI NỀN CÓ ĐỘ CAO = 0). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI![in]Dasbor untuk kendaraan darat (HANYA BERJALAN PADA KETINGGIAN = 0). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]地面车辆仪表板 (仅在海拔 = 0 时运行). 请关闭此面板并选择需要监控的轨道地块！",
+        "author": "YinDreamX",
+        "width": 1,
+        "height": 1,
+        "draw ground": "true",
+        "animation": [
+            {
+                "id": "animation.stopyinx",
+                "x": 0,
+                "y": -36,
+                "frame": 1
+            },
+            {
+                "id": "animation.goyinx",
+                "x": 0,
+                "y": -36,
+                "frame": 0
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "left1.png"
+            },
+            {
+                "bmp": "left2.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "yinx.alert4",
+        "type": "decoration",
+        "category": "$yinx_category_alertmau1",
+        "author": "YinDreamX",
+        "width": 1,
+        "height": 1,
+        "draw ground": "true",
+        "title": "Alert Board 2[vi]Bảng thông báo 2[in]Papan Pengumuman 2[zh]通知面板 2",
+        "text": "Alert Board for ground vehicles (ONLY RUNS ON ALTITUDE = 0). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho phương tiện chạy trên mặt đất (CHỈ CHẠY VỚI NỀN CÓ ĐỘ CAO = 0). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI![in]Dasbor untuk kendaraan darat (HANYA BERJALAN PADA KETINGGIAN = 0). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]地面车辆仪表板 (仅在海拔 = 0 时运行). 请关闭此面板并选择需要监控的轨道地块！",
+        "animation": [
+            {
+                "id": "animation.stopyinx2",
+                "x": 0,
+                "y": -36,
+                "frame": 1
+            },
+            {
+                "id": "animation.goyinx2",
+                "x": 0,
+                "y": -36,
+                "frame": 0
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "right1.png"
+            },
+            {
+                "bmp": "right2.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "yinx.alert5",
+        "type": "decoration",
+        "author": "YinDreamX",
+        "category": "$yinx_category_alertmau2",
+        "width": 1,
+        "height": 1,
+        "title": "Alert Board for elevated train 1[vi]Bảng thông báo cho tàu trên cao 1[in]Papan pemberitahuan untuk kereta layang 1[zh]高架列车通知面板 1",
+        "text": "Alert Board for elevated trains (ONLY RUNS WITH TRACKS PLACED ON TILES AT ALTITUDE = 0, I.E. TRACK ALTITUDE = 2). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho tàu trên cao (CHỈ CHẠY VỚI ĐƯỜNG RAY TÀU ĐƯỢC ĐẶT Ở Ô ĐẤT CÓ ĐỘ CAO = 0, TỨC ĐỘ CAO RAY TÀU = 2). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI![in]Papan pemberitahuan untuk kereta layang (HANYA BERJALAN DENGAN REL YANG DITEMPATKAN DI KOTAK DENGAN KETINGGIAN = 0, ARTINYA KETINGGIAN REL = 2). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]高架列车通知面板 (仅在海拔 = 0 的地块上放置轨道时运行，即轨道高度 = 2). 请关闭此面板并选择需要监控的轨道地块！",
+        "draw ground": "true",
+        "animation": [
+            {
+                "id": "animation.stopyinx2",
+                "x": 0,
+                "y": -36,
+                "frame": 1
+            },
+            {
+                "id": "animation.goyinx2",
+                "x": 0,
+                "y": -36,
+                "frame": 0
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "right1.png"
+            },
+            {
+                "bmp": "right2.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "yinx.alert6",
+        "type": "decoration",
+        "author": "YinDreamX",
+        "width": 1,
+        "height": 1,
+        "category": "$yinx_category_alertmau2",
+        "title": "Alert Board for elevated train 1[vi]Bảng thông báo cho tàu trên cao 1[in]Papan pemberitahuan untuk kereta layang 1[zh]高架列车通知面板 1",
+        "text": "Alert Board for elevated trains (ONLY RUNS WITH TRACKS PLACED ON TILES AT ALTITUDE = 0, I.E. TRACK ALTITUDE = 2). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho tàu trên cao (CHỈ CHẠY VỚI ĐƯỜNG RAY TÀU ĐƯỢC ĐẶT Ở Ô ĐẤT CÓ ĐỘ CAO = 0, TỨC ĐỘ CAO RAY TÀU = 2). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI![in]Papan pemberitahuan untuk kereta layang (HANYA BERJALAN DENGAN REL YANG DITEMPATKAN DI KOTAK DENGAN KETINGGIAN = 0, ARTINYA KETINGGIAN REL = 2). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]高架列车通知面板 (仅在海拔 = 0 的地块上放置轨道时运行，即轨道高度 = 2). 请关闭此面板并选择需要监控的轨道地块！",
+        "draw ground": "true",
+        "animation": [
+            {
+                "id": "animation.stopyinx",
+                "x": 0,
+                "y": -36,
+                "frame": 1
+            },
+            {
+                "id": "animation.goyinx",
+                "x": 0,
+                "y": -36,
+                "frame": 0
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "left1.png"
+            },
+            {
+                "bmp": "left2.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "yinx.alert7",
+        "type": "decoration",
+        "category": "$yinx_category_alertmau2",
+        "author": "YinDreamX",
+        "width": 1,
+        "title": "Alert Board for elevated train 2[vi]Bảng thông báo cho tàu trên cao 2[in]Papan pemberitahuan untuk kereta layang 2[zh]高架列车通知面板 2",
+        "text": "Alert Board for elevated trains (ONLY RUNS WITH TRACKS PLACED ON TILES AT ALTITUDE = 0, I.E. TRACK ALTITUDE = 2). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho tàu trên cao (CHỈ CHẠY VỚI ĐƯỜNG RAY TÀU ĐƯỢC ĐẶT Ở Ô ĐẤT CÓ ĐỘ CAO = 0, TỨC ĐỘ CAO RAY TÀU = 2). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI![in]Papan pemberitahuan untuk kereta layang (HANYA BERJALAN DENGAN REL YANG DITEMPATKAN DI KOTAK DENGAN KETINGGIAN = 0, ARTINYA KETINGGIAN REL = 2). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]高架列车通知面板 (仅在海拔 = 0 的地块上放置轨道时运行，即轨道高度 = 2). 请关闭此面板并选择需要监控的轨道地块！",
+        "height": 1,
+        "draw ground": "true",
+        "animation": [
+            {
+                "id": "1aniyinx",
+                "frame": 0,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "1redani",
+                "frame": 1,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "1greenani",
+                "frame": 2,
+                "x": 0,
+                "y": -36
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "base.png"
+            },
+            {
+                "bmp": "come.png"
+            },
+            {
+                "bmp": "out.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "yinx.alert8",
+        "category": "$yinx_category_alertmau2",
+        "title": "Alert Board for elevated train 2[vi]Bảng thông báo cho tàu trên cao 2[in]Papan pemberitahuan untuk kereta layang 2[zh]高架列车通知面板 2",
+        "text": "Alert Board for elevated trains (ONLY RUNS WITH TRACKS PLACED ON TILES AT ALTITUDE = 0, I.E. TRACK ALTITUDE = 2). PLEASE CLOSE THIS DASHBOARD AND SELECT THE TRACK TILE YOU WANT TO MONITOR![vi]Bảng thông báo dành cho tàu trên cao (CHỈ CHẠY VỚI ĐƯỜNG RAY TÀU ĐƯỢC ĐẶT Ở Ô ĐẤT CÓ ĐỘ CAO = 0, TỨC ĐỘ CAO RAY TÀU = 2). VUI LÒNG ĐÓNG BẢNG NÀY VÀ CHỌN Ô ĐƯỜNG CẦN THEO DÕI![in]Papan pemberitahuan untuk kereta layang (HANYA BERJALAN DENGAN REL YANG DITEMPATKAN DI KOTAK DENGAN KETINGGIAN = 0, ARTINYA KETINGGIAN REL = 2). MOHON TUTUP DASBOR INI DAN PILIH KOTAK REL YANG INGIN DIPANTAU![zh]高架列车通知面板 (仅在海拔 = 0 的地块上放置轨道时运行，即轨道高度 = 2). 请关闭此面板并选择需要监控的轨道地块！",
+        "type": "decoration",
+        "author": "YinDreamX",
+        "width": 1,
+        "height": 1,
+        "draw ground": "true",
+        "animation": [
+            {
+                "id": "2aniyinx",
+                "frame": 0,
+                "x": 0,
+                "y": -36
+            },
+            {
+                "id": "2redani",
+                "frame": 1,
+                "x": 0,
+                "y": -37
+            },
+            {
+                "id": "2greenani",
+                "frame": 2,
+                "x": 0,
+                "y": -36
+            }
+        ],
+        "frames": [
+            {
+                "bmp": "base2.png"
+            },
+            {
+                "bmp": "come2.png"
+            },
+            {
+                "bmp": "out2.png"
+            }
+        ],
+        "script": "alert.lua"
+    },
+    {
+        "id": "$yinx.textx",
+        "type": "topic",
+        "text": "Sending love and greetings from Vietnam. Plugin by YinDreamX!",
+        "weight": 5,
+        "color": {
+            "r": 255,
+            "g": 0,
+            "b": 0
+        }
+    }
 ]
