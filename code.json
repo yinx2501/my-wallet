@@ -50,7 +50,7 @@
         "light switching": "true"
     },
     {
-        "id": "2redani",
+        "id": "2redaniyinx",
         "type": "animation",
         "frames": [
             {
@@ -61,7 +61,7 @@
         "light switching": "true"
     },
     {
-        "id": "2greenani",
+        "id": "2greenaniyinx",
         "type": "animation",
         "frames": [
             {
@@ -83,7 +83,7 @@
         "light switching": "true"
     },
     {
-        "id": "1redani",
+        "id": "1redaniyinx",
         "type": "animation",
         "frames": [
             {
@@ -94,7 +94,7 @@
         "light switching": "true"
     },
     {
-        "id": "1greenani",
+        "id": "1greenaniyinx",
         "type": "animation",
         "frames": [
             {
@@ -158,13 +158,13 @@
                 "y": -36
             },
             {
-                "id": "1redani",
+                "id": "1redaniyinx",
                 "frame": 1,
                 "x": 0,
                 "y": -36
             },
             {
-                "id": "1greenani",
+                "id": "1greenaniyinx",
                 "frame": 2,
                 "x": 0,
                 "y": -36
@@ -201,13 +201,13 @@
                 "y": -36
             },
             {
-                "id": "2redani",
+                "id": "2redaniyinx",
                 "frame": 1,
                 "x": 0,
                 "y": -37
             },
             {
-                "id": "2greenani",
+                "id": "2greenaniyinx",
                 "frame": 2,
                 "x": 0,
                 "y": -36
@@ -380,13 +380,13 @@
                 "y": -36
             },
             {
-                "id": "1redani",
+                "id": "1redaniyinx",
                 "frame": 1,
                 "x": 0,
                 "y": -36
             },
             {
-                "id": "1greenani",
+                "id": "1greenaniyinx",
                 "frame": 2,
                 "x": 0,
                 "y": -36
@@ -423,13 +423,13 @@
                 "y": -36
             },
             {
-                "id": "2redani",
+                "id": "2redaniyinx",
                 "frame": 1,
                 "x": 0,
                 "y": -37
             },
             {
-                "id": "2greenani",
+                "id": "2greenaniyinx",
                 "frame": 2,
                 "x": 0,
                 "y": -36
