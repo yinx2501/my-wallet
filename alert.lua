@@ -2,20 +2,20 @@ local activeSelection = nil
 local yinx_alertStations = {}
 local tick = 0
 
--- Cấu hình thiết bị (GIỮ NGUYÊN)
+local alertSettings = Util.optStorage(TheoTown.getStorage(), "yinx.alert.global.settings")
+alertSettings.delay = alertSettings.delay or 10000
+
 local deviceConfig = {
     ["yinx.alert1"] = 0, ["yinx.alert2"] = 0, ["yinx.alert3"] = 0, ["yinx.alert4"] = 0,
     ["yinx.alert5"] = 2, ["yinx.alert6"] = 2, ["yinx.alert7"] = 2, ["yinx.alert8"] = 2
 }
 
--- (GIỮ NGUYÊN)
 local strings = {
     select_device = "Alert Board: Select device: {1}_{2}. Select road tile![vi]Alert Board: Chọn thiết bị: {1}_{2}. Chọn ô đường![zh]Alert Board: 选择设备: {1}_{2}. 选择道路格子![in]Alert Board: Pilih perangkat: {1}_{2}. Pilih ubin jalan",
     device_lost = "Alert Board: Device lost, cleaning memory.[vi]Alert Board: Phát hiện thiết bị mất, xóa tọa độ.[zh]Alert Board: 检测到设备丢失，正在清理内存。[in]Alert Board: Perangkat hilang, membersihkan memori.",
     assigned = "Alert Board: Assigned: {1}. Monitoring: {2}_{3}[vi]Alert Board: Đã gán: {1}. Đang quét: {2}_{3}[zh]Alert Board: 已分配: {1}. 正在扫描: {2}_{3}[in]Alert Board: Ditugaskan: {1}. Memantau: {2}_{3}"
 }
 
--- (GIỮ NGUYÊN)
 local function yinx_getText(key, val1, val2, val3, val4)
     local text = strings[key] or key
     if val1 then text = string.gsub(text, "{1}", tostring(val1)) end
@@ -25,12 +25,11 @@ local function yinx_getText(key, val1, val2, val3, val4)
     return TheoTown.translateInline(text)
 end
 
--- (GIỮ NGUYÊN)
 local function yinx_getStorage()
+    if City == nil then return {} end
     return Util.optStorage(City.getStorage(), "yinx.alert.device.data")
 end
 
--- ĐÃ THAY ĐỔI: Bỏ load lastCount từ file save
 local function yinx_initStation(x, y)
     local id = x .. "_" .. y
     if not yinx_alertStations[id] then
@@ -38,14 +37,13 @@ local function yinx_initStation(x, y)
         local savedStr = storage[id]
         
         if savedStr then
-            -- Mẹo tương thích ngược: String match vẫn đọc được save cũ (bỏ qua thông số thứ 4)
             local tx, ty, lvl = string.match(savedStr, "([^_]+)_([^_]+)_([^_]+)")
             if tx and ty then
                 yinx_alertStations[id] = {
                     x = x, y = y,
                     tx = tonumber(tx), ty = tonumber(ty), 
                     lvl = tonumber(lvl) or 0,
-                    lastCount = 0,       -- Luôn set bằng 0 khi load lại RAM
+                    lastCount = 0,      
                     resetTime = 0,       
                     isTriggered = false  
                 }
@@ -54,7 +52,6 @@ local function yinx_initStation(x, y)
     end
 end
 
--- Quét danh sách thiết bị khi vào game để nạp vào RAM (GIỮ NGUYÊN)
 function script:init()
     local storage = yinx_getStorage()
     for id, _ in pairs(storage) do
@@ -68,7 +65,6 @@ end
 function script:build(x, y) yinx_initStation(x, y) end
 function script:daily(x, y) yinx_initStation(x, y) end
 
--- (GIỮ NGUYÊN)
 function script:click(x, y, level)
     local building = Tile.getBuildingDraft(x, y)
     local id = building and building:getId()
@@ -82,7 +78,6 @@ function script:click(x, y, level)
     return true
 end
 
--- ĐÃ THAY ĐỔI: Không lưu số lượng xe (lastCount) xuống storage nữa
 function script:earlyTap(tileX, tileY, x, y)
     if activeSelection ~= nil then
         local id = activeSelection.x .. "_" .. activeSelection.y
@@ -95,7 +90,6 @@ function script:earlyTap(tileX, tileY, x, y)
             Tile.setBuildingFrame(activeSelection.x, activeSelection.y, 0)
             
             local storage = yinx_getStorage()
-            -- Bỏ format 4 tham số, chỉ giữ lại 3 (x, y, level)
             storage[id] = string.format("%s_%s_%s", tostring(tileX), tostring(tileY), tostring(scanLevel))
             
             yinx_alertStations[id] = nil
@@ -110,7 +104,6 @@ function script:earlyTap(tileX, tileY, x, y)
     return true
 end
 
--- ĐÃ THAY ĐỔI: Loại bỏ hoàn toàn needSave và phần ghi storage
 function script:update()
     tick = tick + 1
     if tick % 20 ~= 0 then return end 
@@ -136,10 +129,11 @@ function script:update()
                 if currentCount > station.lastCount then
                     local randomFrame = math.random(1, 2)
                     Tile.setBuildingFrame(station.x, station.y, randomFrame)
-                    station.resetTime = currentTime + 11000
+                    
+                    station.resetTime = currentTime + alertSettings.delay
+                    
                     station.isTriggered = true
                 end
-                -- Chỉ lưu lastCount trên RAM, không gọi xuống ổ cứng
                 station.lastCount = currentCount
             end
 
