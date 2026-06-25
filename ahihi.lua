@@ -9,7 +9,7 @@ local billboardList = {}
 local weatherNames = {
     [290373] = "Beautiful Sunny[vi]Trời Nắng Đẹp[in]Cuaca Cerah",
     [849711] = "Light Rain[vi]Có Mưa Nhỏ[in]Hujan Ringan",
-    [622697] = "Thunder[vi]Mưa Bão & Sấm Sét[in]Badai Petir"
+    [622697] = "Thunder[vi]Mưa Bão Sấm Sét[in]Badai Petir"
 }
 
 local fogNames = {
@@ -18,13 +18,13 @@ local fogNames = {
 }
 
 local strings = {
-    forecast = "Forecast: {1} & {2} in {3} days![vi]Dự báo: {1} & {2} trong {3} ngày![in]Prakiraan: {1} & {2} dalam {3} hari!",
+    forecast = "Upcoming weather forecast: {1} & {2} in {3} days![vi]Dự báo thời tiết sắp tới: {1} & {2} trong {3} ngày![in]Prakiraan cuaca mendatang: {1} & {2} dalam {3} hari!",
 }
 
 local currentWeatherTime = 290373 
 local currentFog = 0              
 local daysPassed = 0              
-local changeInterval = 2 -- ĐÃ THAY ĐỔI: Mặc định là 2 ngày lúc mới load
+local changeInterval = 2 
 local lastUpdatedDay = -1 
 local nextWeatherTime = 290373
 local nextFog = 0
@@ -61,8 +61,8 @@ end
 function script:enterCity()
     currentWeatherTime = 290373
     currentFog = 0
-    changeInterval = 2 -- ĐÃ THÊM: Ép cứng thời gian đợt đầu là 2 ngày
-    daysPassed = 0     -- ĐÃ THÊM: Đặt lại bộ đếm ngày về 0 an toàn
+    changeInterval = 2 
+    daysPassed = 0     
     
     City.setFunVar("weatherLocked", 1) 
     City.setFunVar("weatherTime", currentWeatherTime)
@@ -80,11 +80,11 @@ function script:enterCity()
     end
     
     local randWeather = math.random(1, 100)
-    if randWeather <= 60 then nextWeatherTime = 290373
-    elseif randWeather <= 95 then nextWeatherTime = 849711
+    if randWeather <= 70 then nextWeatherTime = 290373
+    elseif randWeather <= 98 then nextWeatherTime = 849711
     else nextWeatherTime = 622697 end
     
-    nextFog = (math.random(1, 100) <= 40) and 1 or 0
+    nextFog = (math.random(1, 100) <= 20) and 1 or 0
     nextChangeInterval = (nextWeatherTime == 622697) and math.random(1, 2) or math.random(5, 20)
     
 end
@@ -120,12 +120,12 @@ function script:nextDay()
         end
         
         local randWeather = math.random(1, 100)
-        if randWeather <= 60 then nextWeatherTime = 290373
-        elseif randWeather <= 95 then nextWeatherTime = 849711
+        if randWeather <= 70 then nextWeatherTime = 290373
+        elseif randWeather <= 98 then nextWeatherTime = 849711
         else nextWeatherTime = 622697 end
         
-        nextFog = (math.random(1, 100) <= 30) and 1 or 0
-        nextChangeInterval = (nextWeatherTime == 622697) and 2 or math.random(5, 20)
+        nextFog = (math.random(1, 100) <= 20) and 1 or 0
+        nextChangeInterval = (nextWeatherTime == 622697) and 2 or math.random(7, 25)
         
         daysPassed = 0
     end
