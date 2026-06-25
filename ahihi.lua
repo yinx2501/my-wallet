@@ -81,11 +81,10 @@ function script:enterCity()
     
     local randWeather = math.random(1, 100)
     if randWeather <= 70 then nextWeatherTime = 290373
-    elseif randWeather <= 98 then nextWeatherTime = 849711
-    else nextWeatherTime = 622697 end
+    else nextWeatherTime = 849711 end
     
     nextFog = (math.random(1, 100) <= 20) and 1 or 0
-    nextChangeInterval = (nextWeatherTime == 622697) and math.random(1, 2) or math.random(5, 20)
+    nextChangeInterval = math.random(5, 20)
     
 end
 
