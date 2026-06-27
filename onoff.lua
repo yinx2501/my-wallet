@@ -43,7 +43,7 @@ function script:update()
 
 
     local currentHour = TheoTown.daytime * 24
-    local isNight = (currentHour < 3 or currentHour >= 17.5)
+    local isNight = (currentHour < 6 or currentHour >= 17.5)
 
 
 
